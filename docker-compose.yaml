@@ -1,0 +1,48 @@
+version: "3.8"
+
+volumes:
+  clickhouse_data: {}
+  grafana_data: {}
+
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:24.2 # amd64 + arm64
+    restart: always
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: clickhouse
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.96.0 # amd64 + arm64
+    restart: always
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    ports:
+      - 4317:4317
+      - 4318:4318
+    volumes:
+      - ./docker/otel-collector:/etc/otelcol-contrib
+
+  grafana:
+    image: grafana/grafana-oss:10.4.0 # amd64 + arm64
+    restart: always
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    environment:
+      GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
+    ports:
+      - 3000:3000
+    volumes:
+      - ./docker/grafana:/etc/grafana
+      - grafana_data:/var/lib/grafana
