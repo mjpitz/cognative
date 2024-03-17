@@ -1,0 +1,14 @@
+{
+  "name": "cognative",
+  "description": "cognative is an opinionated, minimalistic approach to business intelligence and operations.",
+  "version": "0.0.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  },
+  "scripts": {
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
+  }
+}

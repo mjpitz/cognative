@@ -5,28 +5,28 @@ cognative is an opinionated, minimalistic approach to business intelligence and 
 **Goals**
 
 1. Reduce the complexity and number of systems operations staff is required to have expertise on.
-2. Maximizing the breadth of functionality they are able to support across BI and operations.
+2. Maximizing the breadth of functionality they are able to support across business intelligence and operations.
 3. Simplify the experience for developers.
 4. Enable companies to own their own data.
 5. Be flexible enough to support a variety of deployment models.
 
 ## Background
 
-I started cognativate as a recent reflection on the operation constraints faced by smaller organizations and how to make
-the best use of their skills and expertise. Requiring operations staff to be experts on a large number of systems is not
-sustainable and will only lead to burn out. And yet, an increasing number of complex systems need to be run to support
-operations and business analytics.
+I started cognativate as a recent reflection on the operational constraints faced by smaller organizations and how to
+make the best use of their skills and expertise. Requiring operations staff to be experts on a large number of systems
+is not sustainable and will only lead to burn out. And yet, an increasing number of complex systems need to be run to
+support business intelligence and operations.
 
-The project name is a clever word play on words. It takes the acronym for the tech stack (COG) and joins it with 
-"native". It came out of a discussion I had with [Tim Banks](https://github.com/timbanks) about the pitfalls of 
-"traditional" operations tech stacks and how it's often short-sighted once you start to consider the broader needs of 
-business intelligence. COG stands for **C**lickhouse, **O**penTelemetry, and **G**rafana. 
+The project name is a clever word play on words. It takes the acronym for the tech stack (COG) and joins it with
+"native". It came out of a discussion I had with [Tim Banks](https://github.com/timbanks) about the pitfalls of
+"traditional" operations tech stacks and how it's often short-sighted once you start to consider the broader needs of
+business intelligence. COG stands for **C**lickhouse, **O**penTelemetry, and **G**rafana.
 
 - [_Clickhouse_](#clickhouse) acts as our data warehousing layer storing logs, metrics, traces, as well as other
   business related data sets. Clickhouse comes with tons of integrations which makes it easy to source data from a
   variety of sources.
 - [_OpenTelemetry_](#opentelemetry) provides instrumentation for our ecosystem. Information can be collected from a
-  variety of sources using vendor neutral solutions. It also offers support across a large number of languages, making 
+  variety of sources using vendor neutral solutions. It also offers support across a large number of languages, making
   it easy to add to any system today.
 - [_Grafana_](#grafana) provides our data exploration, visualization, and alerting layer. It can easily be
   integrated with solutions like PagerDuty, OpsGenie, BetterStack, and much more.
@@ -36,8 +36,8 @@ business intelligence. COG stands for **C**lickhouse, **O**penTelemetry, and **G
 [LGTM]: #lgtmp---loki-grafana-tempo-mimir--prometheus
 
 Beyond proposing the initial proof of concept, my hope is to develop a lot of supporting resources to make this solution
-as drop in as possible. Companies of varying sizes should be able to  Solutions like [LGTM][] benefit heavily from 
-having many prebuilt resources (like dashboards and alerts) out of box. 
+as drop in as possible. Companies of varying sizes should be able to Solutions like [LGTM][] benefit heavily from
+having many prebuilt resources (like dashboards and alerts) out of box.
 
 - Docker
   - [x] Initial proof of concept
@@ -59,31 +59,34 @@ having many prebuilt resources (like dashboards and alerts) out of box.
       - [ ] `otel-collector` - pull from open-telemetry/opentelemetry-collector
       - [ ] `otel-collector-contrib` - can I reuse open-telemetry/opentelemetry-collector?
       - [ ] `grafana` - pull from grafana/grafana
-- Monitoring
+- Operations
   - [ ] Dashboards & Alerting
-    - [ ] JSONNET works, but is very dry... maybe a typescript library
-    - [ ] Kubernetes monitoring mixin, but using clickhouse queries and grafana alerts
+    - [ ] JSONNET works, but is very dry... maybe a typescript library.
+    - [ ] Kubernetes monitoring mixin, but using clickhouse queries and grafana alerts.
+  - [ ] Playbooks
+    - [ ] Common playbooks that can be used for resolving issues in production.
 
 ## Ecosystem
 
-[//]: # (todo: this section really is just a collection of notes for now... I need to pull it together better)
+<!-- todo: this section really is just a collection of notes for now... I need to pull it together better -->
 
 ```mermaid
 flowchart LR
     grafana[Grafana]
     database[Postgres, MySQL, ...]
     clickhouse[Clickhouse]
-    
+
     grafana -- live product data --> database
     grafana -- intelligence + observability --> clickhouse
     clickhouse -- snapshot product data from --> database
-    
+
     otel-collector-contrib --> clickhouse
     otel-collector -- oltp --> otel-collector-contrib
     client -- oltp --> otel-collector-contrib
 ```
 
-[//]: # (COMMON BADGES)
+<!-- COMMON BADGES -->
+
 [License - Apache 2.0]: https://img.shields.io/badge/license-Apache_2.0-blueviolet?style=for-the-badge
 [License - AGPL 3.0]: https://img.shields.io/badge/license-AGPL_3.0-blueviolet?style=for-the-badge
 [Host - On-prem]: https://img.shields.io/badge/host-on_prem-yellow?style=for-the-badge
@@ -96,7 +99,7 @@ flowchart LR
 ### Clickhouse
 
 > ClickHouse is the fastest and most resource efficient open-source database for real-time apps and analytics.
-> 
+>
 > https://clickhouse.com/
 
 ![License - Apache 2.0][]
@@ -125,18 +128,17 @@ flowchart LR
 - Supports a large number of [languages](https://opentelemetry.io/docs/languages/).
 - [Collectors](https://opentelemetry.io/docs/collector/) provide a vendor-agnostic way to receive, process, and export
   telemetry data.
-- [Exporters](https://opentelemetry.io/docs/collector/configuration/#exporters) allow data to be sent to a variety of 
+- [Exporters](https://opentelemetry.io/docs/collector/configuration/#exporters) allow data to be sent to a variety of
   backend destinations.
-- [OTLP](https://opentelemetry.io/docs/specs/otlp/) provides a common and consistent way to collect metrics and traces 
+- [OTLP](https://opentelemetry.io/docs/specs/otlp/) provides a common and consistent way to collect metrics and traces
   across languages.
 
 ### Grafana
 
 > Query, visualize, alert on, and understand your data no matter where it’s stored. With Grafana you can create,
 > explore, and share all of your data through beautiful, flexible dashboards.
-> 
+>
 > https://grafana.com/oss/grafana/
-
 
 ![License - AGPL 3.0][]
 ![Role - Visualization][]
@@ -154,7 +156,7 @@ flowchart LR
 
 ## Comparisons
 
-[//]: # (todo: this section is mostly just a collection of notes and some rough ideas)
+<!-- todo: this section is mostly just a collection of notes and some rough ideas -->
 
 ### ELK - ElasticSearch, LogStash, Kibana
 
@@ -162,22 +164,18 @@ The ELK stack is a long-standing solution for logs and metrics.
 
 LogStash has a well-established history of being deployed as an ETL pipeline.
 
-[//]: # (todo: add more content here...)
-
-
+<!-- todo: add more content here... -->
 
 ### LGTM/P - Loki, Grafana, Tempo, Mimir / Prometheus
 
 The full Grafana stack requires a lot of operational experience. It effectively requires learning three new "databases"
-for data that is largely the same. Loki is effectively a database for logs. Tempo, a database for traces. And finally, 
+for data that is largely the same. Loki is effectively a database for logs. Tempo, a database for traces. And finally,
 Mimir / Prometheus, a database for metrics. Each of these systems have their own resource usage and scaling requirements.
 
 In addition, this is a partial solution as it does not cover the business intelligence side of the world. An additional
 database can be added to support your business analytics, but doing so will only add to the complexity.
 
-[//]: # (todo: add more content here...)
-
-
+<!-- todo: add more content here... -->
 
 ### XOG - ?, OpenTelemetry, Grafana
 
@@ -187,9 +185,7 @@ For a starter or simplified deployment, this is a great option. Leveraging an ex
 complexity today, it will pose some interesting technical challenges later on. Importing data from an existing database
 technology into a solution like Clickhouse will be relatively easy.
 
-[//]: # (todo: add more content here...)
-
-
+<!-- todo: add more content here... -->
 
 ## License
 
