@@ -108,7 +108,7 @@ flowchart LR
 ![Host - On-prem][]
 ![Host - Cloud][]
 
-- System that's very reminiscent of one that I've used at a past employers. 
+- System that's very reminiscent of one that I've used at a past [employer](https://www.youtube.com/watch?v=LBDZFtqL-ck). 
 - Easily import data from existing databases, object stores, queues, and many more [integrations](https://clickhouse.com/docs/en/integrations).
 - Cloud option for those who don't want to run the system themselves.
 - High availability requires deployment of a [Zookeeper ensemble](https://zookeeper.apache.org/doc/r3.1.2/zookeeperAdmin.html).
