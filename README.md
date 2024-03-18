@@ -1,3 +1,15 @@
+<div align="center">
+
+[![Documentation][]](#cognative)
+[![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
+[![Developers guide][]](DEVELOPING.md)
+
+[Documentation]: https://img.shields.io/badge/documentation-gray?style=for-the-badge
+[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge
+[Developers guide]: https://img.shields.io/badge/developers_guide-blue?style=for-the-badge
+
+</div>
+
 # cognative
 
 cognative is an opinionated, minimalistic approach to business intelligence and operations.
@@ -39,26 +51,21 @@ Beyond proposing the initial proof of concept, my hope is to develop a lot of su
 as drop in as possible. Companies of varying sizes should be able to Solutions like [LGTM][] benefit heavily from
 having many prebuilt resources (like dashboards and alerts) out of box.
 
-- Docker
-  - [x] Initial proof of concept
 - Examples
   - [ ] Clients emitting data
   - [ ] Stream processing pipelines
 - Deployment
   - [ ] Docker
-    - [x] local development
-    - [ ] high availability
-  - [ ] Helm
+    - [x] local development / proof of concept
+  - [x] Helm
     - Repositories
+      - `bitnami` - https://charts.bitnami.com/bitnami
       - `open-telemetry` - https://open-telemetry.github.io/opentelemetry-helm-charts
       - `grafana` - https://grafana.github.io/helm-charts
     - Charts
-      - [ ] `cognative` - parent chart
-      - [ ] `zookeeper` - maybe pull from bitnami for the time being?
-      - [ ] `clickhouse` - maybe pull from bitnami for the time being?
-      - [ ] `otel-collector` - pull from open-telemetry/opentelemetry-collector
-      - [ ] `otel-collector-contrib` - can I reuse open-telemetry/opentelemetry-collector?
-      - [ ] `grafana` - pull from grafana/grafana
+      - [x] `cognative-bitnami` - experimental version of stack, built from the bitnami helm charts. This was
+            predominantly assembled to get some experimentation going and focus on the areas that really matter (the
+            dashboards, alerts, playbooks, and identifying missing parts).
 - Operations
   - [ ] Dashboards & Alerting
     - [ ] JSONNET works, but is very dry... maybe a typescript library.

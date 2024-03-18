@@ -1,0 +1,24 @@
+apiVersion: v2
+type: application
+name: cognative-bitnami
+description: | 
+  (BETA) Deploy the cognative stack to kubernetes using existing helm charts. Zookeeper and Clickhouse are sourced from
+  the Bitnami project.
+version: 0.2403.0
+appVersion: 0.2403.0
+dependencies:
+  - name: clickhouse
+    repository: https://charts.bitnami.com/bitnami
+    version: 5.3.1
+    condition: clickhouse.enabled
+
+  - name: opentelemetry-collector
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+    version: 0.83.1
+    alias: collector
+    condition: collector.enabled
+
+  - name: grafana
+    repository: https://grafana.github.io/helm-charts
+    version: 7.3.7
+    condition: grafana.enabled
