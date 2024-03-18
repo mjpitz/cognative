@@ -53,6 +53,14 @@ Continuous Learning: Encourage continuous learning and professional development 
                      opportunities for skill-building, knowledge sharing, and mentorship within the community.
 -->
 
+## Formatting
+
+Formatting will be run on every commit and pull request to ensure the project meets the appropriate code style.
+
+```shell
+npm run format
+```
+
 ## Licensing
 
 When writing source code for the project, new files will need to include the proper legal header. This command
