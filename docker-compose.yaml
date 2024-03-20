@@ -21,7 +21,7 @@ services:
     volumes:
       - clickhouse_data:/var/lib/clickhouse
 
-  otel-collector:
+  collector:
     image: otel/opentelemetry-collector-contrib:0.96.0 # amd64 + arm64
     restart: always
     depends_on:
@@ -31,7 +31,10 @@ services:
       - 4317:4317
       - 4318:4318
     volumes:
-      - ./docker/otel-collector:/etc/otelcol-contrib
+      - ./docker/collector:/etc/otelcol-contrib
+
+  # cluster-agent: {}
+  # host-agent: {}
 
   grafana:
     image: grafana/grafana-oss:10.4.0 # amd64 + arm64
