@@ -10,13 +10,24 @@ dependencies:
   - name: clickhouse
     repository: https://charts.bitnami.com/bitnami
     version: 5.3.1
-    condition: clickhouse.enabled
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.83.1
+    version: 0.84.0
     alias: collector
     condition: collector.enabled
+
+  - name: opentelemetry-collector
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+    version: 0.84.0
+    alias: cluster
+    condition: cluster.enabled
+
+  - name: opentelemetry-collector
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+    version: 0.84.0
+    alias: node
+    condition: node.enabled
 
   - name: grafana
     repository: https://grafana.github.io/helm-charts
