@@ -1,0 +1,18 @@
+dependencies:
+- name: clickhouse
+  repository: ""
+  version: '*'
+- name: opentelemetry-collector
+  repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+  version: 0.84.0
+- name: opentelemetry-collector
+  repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+  version: 0.84.0
+- name: opentelemetry-collector
+  repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+  version: 0.84.0
+- name: grafana
+  repository: https://grafana.github.io/helm-charts
+  version: 7.3.7
+digest: sha256:7c23fc0727b155cb292f4dc7d3d132f4b88c7702cc444e4840617f1036df2f40
+generated: "2024-03-20T10:16:47.3233-05:00"
