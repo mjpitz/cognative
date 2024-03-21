@@ -9,6 +9,7 @@ appVersion: 0.2403.0
 dependencies:
   - name: clickhouse
     version: "*"
+    condition: clickhouse.enabled
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
