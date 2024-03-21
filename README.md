@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Documentation][]](#cognative)
+[![Documentation][]](#overview)
 [![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
 [![Developers guide][]](DEVELOPING.md)
 
@@ -55,42 +55,51 @@ having many prebuilt resources (like dashboards and alerts) out of box.
   - [ ] Clients emitting data
   - [ ] Stream processing pipelines
 - Deployment
-  - [ ] Docker
-    - [x] local development / proof of concept
+  - [x] Docker
+    - Primarily for development and to show the proof of concept. Not suitable for production.
   - [x] Helm
-    - Repositories
-      - `bitnami` - https://charts.bitnami.com/bitnami
-      - `open-telemetry` - https://open-telemetry.github.io/opentelemetry-helm-charts
-      - `grafana` - https://grafana.github.io/helm-charts
+    - Capabilities
+      - [x] Collector that insulates write access to clickhouse.
+      - [x] Cluster agent that collects control plane statistics.
+      - [x] Node agent that collects host level statistics.
+      - [x] Grafana preconfigured with a connection to clickhouse.
     - Charts
-      - [x] `cognative-bitnami` - experimental version of stack, built from the bitnami helm charts. This was
-            predominantly assembled to get some experimentation going and focus on the areas that really matter (the
-            dashboards, alerts, playbooks, and identifying missing parts).
+      - [x] [`cognative-standalone`](charts/cognative-standalone) offers a simpler variant. Instead of worrying about
+            a clustered Clickhouse and Zookeeper cluster, it opts for a single instance deployment. This chart also offers
+            companies a simpler way to trial the platform.
+      - [x] [`cognative-bitnami`](charts/cognative-bitnami) offers an early version of the platform using prebuilt
+            charts as dependencies. It's named for the provider of the storage tier, Bitnami. While it currently works, I
+            have noticed some invariants with its current behavior.
 - Operations
   - [ ] Dashboards & Alerting
-    - [ ] JSONNET works, but is very dry... maybe a typescript library.
-    - [ ] Kubernetes monitoring mixin, but using clickhouse queries and grafana alerts.
+    - [ ] Use [kubernetes-monitoring/kubernetes-mixin][] as a starting point...
+    - [ ] JSONNET works, but it's not great
   - [ ] Playbooks
     - [ ] Common playbooks that can be used for resolving issues in production.
 
-## Ecosystem
+[kubernetes-monitoring/kubernetes-mixin]: https://github.com/kubernetes-monitoring/kubernetes-mixin
+
+## Overview
 
 <!-- todo: this section really is just a collection of notes for now... I need to pull it together better -->
 
-```mermaid
-flowchart LR
-    grafana[Grafana]
-    database[Postgres, MySQL, ...]
-    clickhouse[Clickhouse]
+- [Background](#background)
+  - [Scope of work](#scope-of-work)
+- [Overview](#overview)
+- [Technologies](#technologies)
+  - [Clickhouse](#clickhouse)
+  - [OpenTelemetry](#opentelemetry)
+  - [Grafana](#grafana)
+- [Architecture](#architecture)
+  - [Self-hosted](#self-hosted)
+  - [Cloud-hosted](#cloud-hosted)
+- [Alternatives](#alternatives)
+  - [ELK - ElasticSearch, LogStash, Kibana](#elk---elasticsearch-logstash-kibana)
+  - [LGTM/P - Loki, Grafana, Tempo, Mimir / Prometheus](#lgtmp---loki-grafana-tempo-mimir--prometheus)
+  - [XOG - ?, OpenTelemetry, Grafana](#xog----opentelemetry-grafana)
+- [License](LICENSE)
 
-    grafana -- live product data --> database
-    grafana -- intelligence + observability --> clickhouse
-    clickhouse -- snapshot product data from --> database
-
-    otel-collector-contrib --> clickhouse
-    otel-collector -- oltp --> otel-collector-contrib
-    client -- oltp --> otel-collector-contrib
-```
+## Technologies
 
 <!-- COMMON BADGES -->
 
@@ -162,7 +171,81 @@ flowchart LR
 - Integrates with PagerDuty, BetterStack, and many others on-call solutions.
 - Cloud hosted solution available for those who don't want to run the system themselves.
 
-## Comparisons
+## Architecture
+
+The architecture of the underlying system is intentionally flexible to support the addition of components to better
+address performance or reliability concerns, as well as cloud solutions for those who prefer to run less infrastructure.
+
+### Self-hosted
+
+This illustrates the high-level communication pattern between the various actors within the system. Since your company
+will take on ownership running the various components, it's entirely up to you how this subsystem is deployed.
+
+```mermaid
+flowchart TD
+    database[postgres, mysql, ...]
+
+    grafana -- live product data --> database
+    clickhouse -- snapshot product data from --> database
+
+    grafana -- intelligence + observability --> clickhouse
+    collector --> clickhouse
+
+    cluster-agent -- oltp --> collector
+    node-agent -- oltp --> collector
+    prometheus-agent -. oltp .-> collector
+    app -. oltp .-> collector
+
+    prometheus-agent -. scrapes /metrics .-> app
+```
+
+### Cloud-hosted
+
+For those who prefer cloud-hosted solutions, both Grafana and Clickhouse offer a cloud-hosted version of their system.
+Clickhouse will spin up and manage a cluster inside your AWS account for you. Grafana will host an instance on their
+side of the world so you don't need to worry about the minutia of operating the complexity of that alerting stack. The
+challenge will always come down to connecting those two clouds to enable communication.
+
+```mermaid
+flowchart TD
+    subgraph Amazon Web Services
+        database[postgres, mysql, ...]
+
+        subgraph Clickhouse Cloud
+            clickhouse
+            zookeeper
+        end
+
+        subgraph Kubernetes
+            collector
+            cluster-agent
+            node-agent
+            prometheus-agent
+            app
+        end
+    end
+
+    subgraph Grafana Cloud
+        grafana
+    end
+
+    clickhouse -- coordinates using --> zookeeper
+
+    clickhouse -- snapshot product data from --> database
+    grafana -- live product data --> database
+
+    grafana -- intelligence + observability --> clickhouse
+    collector --> clickhouse
+
+    cluster-agent -- oltp --> collector
+    node-agent -- oltp --> collector
+    prometheus-agent -. oltp .-> collector
+    app -. oltp .-> collector
+
+    prometheus-agent -. scrapes /metrics .-> app
+```
+
+## Alternatives
 
 <!-- todo: this section is mostly just a collection of notes and some rough ideas -->
 
