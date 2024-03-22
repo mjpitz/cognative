@@ -27,21 +27,21 @@ jobs:
         with:
           version: v3.4.1
 
-#      - name: Prepare GPG key
-#        run: |
-#          mkdir .cr-gpg
-#
-#          keyring=".cr-gpg/secring.gpg"
-#          base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring"
-#
-#          passphrase_file=".cr-gpg/passphrase"
-#          echo "$GPG_PASSPHRASE" > "$passphrase_file"
-#
-#          echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV"
-#          echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV"
-#        env:
-#          GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}"
-#          GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
+      #      - name: Prepare GPG key
+      #        run: |
+      #          mkdir .cr-gpg
+      #
+      #          keyring=".cr-gpg/secring.gpg"
+      #          base64 -d <<< "$GPG_KEYRING_BASE64" > "$keyring"
+      #
+      #          passphrase_file=".cr-gpg/passphrase"
+      #          echo "$GPG_PASSPHRASE" > "$passphrase_file"
+      #
+      #          echo "CR_PASSPHRASE_FILE=$passphrase_file" >> "$GITHUB_ENV"
+      #          echo "CR_KEYRING=$keyring" >> "$GITHUB_ENV"
+      #        env:
+      #          GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}"
+      #          GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.5.0
@@ -49,4 +49,4 @@ jobs:
           charts_dir: charts
           config: charts/cr.yaml
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_TOKEN: "${{ secrets.GH_TOKEN }}"
