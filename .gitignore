@@ -1,2 +1,4 @@
 charts/*/charts/*.tgz
+charts/*/Chart.lock
+
 node_modules/
