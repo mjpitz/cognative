@@ -1,7 +1,0 @@
-charts-repo: https://mjpitz.github.io/cognative/
-owner: mjpitz
-git-repo: cognative
-#sign: true
-#key: Mya Pitzeruse
-pages-branch: main
-pages-index-path: docs/index.yaml
