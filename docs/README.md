@@ -1,13 +1,13 @@
 <div align="center">
-
-[![GitHub Repository][]](https://github.com/mjpitz/cognative/)
-[![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
-[![Developers guide][]](https://github.com/mjpitz/cognative/blob/main/DEVELOPING.md)
-
-[GitHub Repository]: https://img.shields.io/badge/github_repository-gray?style=for-the-badge
-[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge
-[Developers guide]: https://img.shields.io/badge/developers_guide-blue?style=for-the-badge
-
+    <a href="https://github.com/mjpitz/cognative/">
+        <img alt="GitHub Repository" src="https://img.shields.io/badge/github_repository-gray?style=for-the-badge"/>
+    </a>
+    <a href="https://github.com/mjpitz/cognative/discussions">
+        <img alt="Join the discussion" src="https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge"/>
+    </a>
+    <a href="https://github.com/mjpitz/cognative/blob/main/DEVELOPING.md">
+        <img alt="Developers guide" src="https://img.shields.io/badge/developers_guide-blue?style=for-the-badge"/>
+    </a>
 </div>
 
 cognative is an opinionated, minimalistic approach to business intelligence 🧠 and operations 🚨.
