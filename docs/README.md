@@ -1,4 +1,4 @@
-<div align="center">
+<div align="left">
     <a href="https://github.com/mjpitz/cognative/">
         <img alt="GitHub Repository" src="https://img.shields.io/badge/github_repository-gray?style=for-the-badge"/>
     </a>
