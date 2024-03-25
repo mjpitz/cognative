@@ -1,5 +1,12 @@
 # Developers Guide
 
+[`charts`](charts) contains a collection of charts that are currently a work in progress. The working version of the
+`cognative` chart can be found over on [mya.sh](https://mya.sh).
+
+[`docs`](docs) contains the contents of the public website.
+
+[`legal`](legal)
+
 ## Values
 
 <!-- todo: add some more content here... it's mostly just placeholder right now -->

@@ -5,8 +5,11 @@
     <a href="https://github.com/mjpitz/cognative/discussions">
         <img alt="Join the discussion" src="https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge"/>
     </a>
+    <a href="https://github.com/mjpitz/cognative/blob/main/ARCHITECTURE.md">
+        <img alt="System architecture" src="https://img.shields.io/badge/system_architecture-blue?style=for-the-badge"/>
+    </a>
     <a href="https://github.com/mjpitz/cognative/blob/main/DEVELOPING.md">
-        <img alt="Developers guide" src="https://img.shields.io/badge/developers_guide-blue?style=for-the-badge"/>
+        <img alt="Developers guide" src="https://img.shields.io/badge/developers_guide-yellow?style=for-the-badge"/>
     </a>
 </div>
 
@@ -28,7 +31,22 @@ is not sustainable and will only lead to burn out. And yet, an increasing number
 support business intelligence and operations.
 
 The project name is a clever play on words. It takes the acronym for the tech stack (COG) and joins it with "native".
-COG stands for **C**lickhouse, **O**penTelemetry, and **G**rafana.
+It came out of a discussion I had with [Tim Banks](https://github.com/timbanks) about the pitfalls of "traditional"
+operations tech stacks and how it's often short-sighted once you start to consider the broader needs of business
+intelligence. COG stands for **C**lickhouse, **O**penTelemetry, and **G**rafana.
+
+- [_Clickhouse_][] is our data warehouse layer. It stores logs, metrics, traces, as well as other business
+  related data sets. Clickhouse also comes with tons of integrations which makes it easy to source data from a variety
+  of locations.
+- [_OpenTelemetry_][] provides instrumentation for our ecosystem. Information is collected from a variety
+  of sources using vendor neutral solutions. The community also supports a large number of languages, making it easy to
+  add to many systems today.
+- [_Grafana_][] provides our data exploration, visualization, and alerting layer. It can easily integrate with
+  on-call solutions like PagerDuty, OpsGenie, BetterStack, and many more.
+
+[_Clickhouse_]: https://clickhouse.com/
+[_OpenTelemetry_]: https://opentelemetry.io/
+[_Grafana_]: https://grafana.com/oss/grafana/
 
 ## Helm
 
@@ -41,7 +59,7 @@ helm repo add mya https://mya.sh
 The current version of the Helm chart only supports a single instance of Clickhouse. It is great for testing out the
 stack, and smaller scaled deployments that don't require high availability. For a more critical, production-based
 workload, we recommend disabling the `clickhouse` portion of this chart, and leveraging Clickhouse Cloud in the
-meantime. You will also need to configure your connection credentials to have the deployment connect to your managed
+meantime. You will also need to configure your connection details to have the deployment connect to your managed
 instance.
 
 ```shell
