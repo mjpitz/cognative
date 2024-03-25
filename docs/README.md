@@ -1,28 +1,49 @@
-cognative is an opinionated, minimalistic approach to business intelligence and operations.
+<div align="center">
+
+[![GitHub Repository][]](https://github.com/mjpitz/cognative/)
+[![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
+[![Developers guide][]](https://github.com/mjpitz/cognative/blob/main/DEVELOPING.md)
+
+[GitHub Repository]: https://img.shields.io/badge/github_repository-gray?style=for-the-badge
+[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge
+[Developers guide]: https://img.shields.io/badge/developers_guide-blue?style=for-the-badge
+
+</div>
+
+cognative is an opinionated, minimalistic approach to business intelligence 🧠 and operations 🚨.
 
 **Goals**
 
 1. Reduce the complexity and number of systems operations staff is required to have expertise on.
-2. Maximize the breath of functionality they are able to support across business intelligence and operations.
+2. Maximize the breadth of functionality they are able to support across business intelligence and operations.
 3. Simplify the experience for developers.
 4. Enable companies to own their own data.
 5. Be flexible enough to support a variety of deployment models.
 
-## Helm
+## Background
 
-_WARNING! THIS IS STILL UNDER ACTIVE DEVELOPMENT AND MAY NOT BE AVAILABLE YET._
+I started cognative as a recent reflection on the operational constraints faced by smaller organizations and how to
+make best use of their skills and expertise. Requiring operations staff to be experts on a large number of systems
+is not sustainable and will only lead to burn out. And yet, an increasing number of complex systems need to be run to
+support business intelligence and operations.
+
+The project name is a clever play on words. It takes the acronym for the tech stack (COG) and joins it with "native".
+COG stands for **C**lickhouse, **O**penTelemetry, and **G**rafana.
+
+## Helm
 
 You can easily deploy the `cognative` stack to Kubernetes using Helm.
 
 ```shell
-helm repo add cognative https://mjpitz.github.io/cognative/
+helm repo add mya https://mya.sh
 ```
 
-Currently, the standalone version of the chart is the only one that is supported. It is great for testing out the stack
-but is not geared toward high-availability. For production use, we recommend disabling the `clickhouse` portion of this
-chart and leveraging Clickhouse Cloud in the meantime. You will also need to configure your connection credentials to
-have the deployment connect to your managed instance.
+The current version of the Helm chart only supports a single instance of Clickhouse. It is great for testing out the
+stack, and smaller scaled deployments that don't require high availability. For a more critical, production-based
+workload, we recommend disabling the `clickhouse` portion of this chart, and leveraging Clickhouse Cloud in the
+meantime. You will also need to configure your connection credentials to have the deployment connect to your managed
+instance.
 
 ```shell
-helm upgrade -i cognative-standalone cognative/cognative-standalone
+helm upgrade -i cognative mya/cognative
 ```

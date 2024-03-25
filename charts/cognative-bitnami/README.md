@@ -23,5 +23,5 @@ helm upgrade -i cognative-bitnami ./charts/cognative-bitnami \
 ### Notes
 
 I'm seeing some odd invariants with the underlying clickhouse chart where the queries are rather inconsistent depending
-on which instance of clickhouse you hit... Need to look to see if I'm addressing the service properly (I suspect I am)
-but maybe I'm missing something...
+on which instance of clickhouse you hit. This is likely due to use of non-replicated tables. This will require some
+investigation into how the OpenTelemetry exporter performs the `CREATE TABLE` operation.

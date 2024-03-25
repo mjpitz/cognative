@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Documentation][]](#overview)
+[![Documentation][]](https://mjpitz.github.io/cognative/)
 [![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
 [![Developers guide][]](DEVELOPING.md)
 
@@ -12,12 +12,12 @@
 
 # cognative
 
-cognative is an opinionated, minimalistic approach to business intelligence and operations.
+cognative is an opinionated, minimalistic approach to business intelligence 🧠 and operations 🚨.
 
 **Goals**
 
 1. Reduce the complexity and number of systems operations staff is required to have expertise on.
-2. Maximize the breath of functionality they are able to support across business intelligence and operations.
+2. Maximize the breadth of functionality they are able to support across business intelligence and operations.
 3. Simplify the experience for developers.
 4. Enable companies to own their own data.
 5. Be flexible enough to support a variety of deployment models.
