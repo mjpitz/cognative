@@ -1,19 +1,14 @@
-<div align="left">
-    <a href="https://github.com/mjpitz/cognative/">
-        <img alt="GitHub Repository" src="https://img.shields.io/badge/github_repository-gray?style=for-the-badge"/>
-    </a>
-    <a href="https://github.com/mjpitz/cognative/discussions">
-        <img alt="Join the discussion" src="https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge"/>
-    </a>
-    <a href="https://github.com/mjpitz/cognative/blob/main/ARCHITECTURE.md">
-        <img alt="System architecture" src="https://img.shields.io/badge/system_architecture-blue?style=for-the-badge"/>
-    </a>
-    <a href="https://github.com/mjpitz/cognative/blob/main/DEVELOPING.md">
-        <img alt="Developers guide" src="https://img.shields.io/badge/developers_guide-yellow?style=for-the-badge"/>
-    </a>
-</div>
-
 cognative is an opinionated, minimalistic approach to business intelligence 🧠 and operations 🚨.
+
+[![GitHub Repository][]](https://github.com/mjpitz/cognative/)
+[![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
+[![System architecture][]](https://github.com/mjpitz/cognative/blob/main/ARCHITECTURE.md)
+[![Developers guide][]](https://github.com/mjpitz/cognative/blob/main/DEVELOPING.md)
+
+[GitHub Repository]: https://img.shields.io/badge/github_repository-gray?style=for-the-badge
+[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-blueviolet?style=for-the-badge
+[System architecture]: https://img.shields.io/badge/system_architecture-blue?style=for-the-badge
+[Developers guide]: https://img.shields.io/badge/developers_guide-yellow?style=for-the-badge
 
 **Goals**
 
