@@ -1,64 +1,39 @@
 # Developers Guide
 
-[`charts`](charts) contains a collection of charts that are currently a work in progress. The working version of the
-`cognative` chart can be found over on [mya.sh](https://mya.sh).
-
-[`docs`](docs) contains the contents of the public website.
-
-[`legal`](legal)
-
 ## Values
 
-<!-- todo: add some more content here... it's mostly just placeholder right now -->
+> :warning: Our values are under active discussion. Please feel free to contribute your thoughts and ideas.
+>
+> https://github.com/mjpitz/cognative/discussions/18
 
-- Collaboration
-- Accessibility
-- Community
-- Ethical Considerations - User Privacy, Security
+**Accessibility** - Data produced by our systems, for intelligence or operations, should be accessible to developers
+across the entire stack, from development to production. Otherwise, implementing, testing, and verifying metrics
+important to business is incredibly difficult. By having an accessible stack, developers from all walks of life can help
+the company thrive, not just those with experience or hold prior knowledge.
 
-<!--
-Some ChatGPT dribble...
+## Work
 
-> What are good engineering values to hold for open source projects
+### Dashboards and Alerting
 
-In open source projects, engineering values play a crucial role in fostering collaboration, innovation, and
-sustainability. Here are some good engineering values to hold for open source projects:
+> :warning: This work still needs a home within the project. Discussions about this solution are ongoing.
+>
+> https://github.com/mjpitz/cognative/issues/10
 
-Transparency: Make all aspects of the project visible, including code, discussions, decisions, and roadmaps.
-              Transparency builds trust within the community and enables effective collaboration.
+### Helm Charts
 
-Collaboration: Encourage a culture of collaboration where contributors feel empowered to share ideas, provide feedback,
-               and work together towards common goals. Foster a welcoming environment for newcomers to join and
-               contribute.
+[`charts`](charts) currently contains a collection of charts that are currently a work in progress. The working version
+of the `cognative` chart can be found over on [mya.sh](https://mya.sh/charts).
 
-Quality: Prioritize the quality of code, documentation, and user experience. Emphasize thorough testing, code reviews,
-         and continuous integration to maintain high standards and ensure reliability.
+```shell
+helm repo add mya https://mya.sh
+helm upgrade -i cognative mya/cognative
+```
 
-Accessibility: Design and develop software that is accessible to a diverse audience, including people with disabilities.
-               Strive to make user interfaces intuitive and inclusive, and provide comprehensive documentation to
-               support all users.
+### Public Website
 
-Community: Foster a vibrant and inclusive community where everyone feels valued and respected. Encourage participation
-           from individuals with diverse backgrounds, experiences, and perspectives.
+The contents of the [public website][] can be found in the [`docs`](docs) directory.
 
-Openness: Embrace openness in decision-making processes, governance structures, and licensing. Maintain open channels of
-          communication and governance mechanisms that enable stakeholders to participate in shaping the direction of
-          the project.
-
-Sustainability: Ensure the long-term sustainability of the project by fostering a healthy ecosystem of contributors,
-                users, and supporters. Establish clear project governance, maintain a roadmap for future development,
-                and actively seek funding or support to sustain ongoing development efforts.
-
-Adaptability: Be open to change and adaptation in response to evolving needs, technologies, and feedback from the
-              community. Embrace new ideas and approaches that enhance the project's effectiveness and relevance.
-
-Ethical Considerations: Consider the ethical implications of the project's technology and its potential impact on
-                        society. Strive to develop software that respects user privacy, promotes security, and upholds
-                        ethical principles.
-
-Continuous Learning: Encourage continuous learning and professional development among contributors. Provide
-                     opportunities for skill-building, knowledge sharing, and mentorship within the community.
--->
+[public website]: https://mjpitz.github.io/cognative/
 
 ## Formatting
 

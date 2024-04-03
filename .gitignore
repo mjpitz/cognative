@@ -1,3 +1,5 @@
+/.idea
+
 charts/*/charts/*.tgz
 charts/*/Chart.lock
 
