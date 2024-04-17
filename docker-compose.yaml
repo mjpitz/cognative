@@ -6,7 +6,7 @@ volumes:
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:24.2 # amd64 + arm64
+    image: clickhouse/clickhouse-server:24.3 # amd64 + arm64
     restart: always
     environment:
       CLICKHOUSE_DB: default
