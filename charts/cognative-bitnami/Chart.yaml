@@ -14,19 +14,19 @@ dependencies:
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.84.0
+    version: 0.89.0
     alias: collector
     condition: collector.enabled
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.84.0
+    version: 0.89.0
     alias: cluster
     condition: cluster.enabled
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.84.0
+    version: 0.89.0
     alias: node
     condition: node.enabled
 
