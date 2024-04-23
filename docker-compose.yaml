@@ -22,7 +22,7 @@ services:
       - clickhouse_data:/var/lib/clickhouse
 
   collector:
-    image: otel/opentelemetry-collector-contrib:0.96.0 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.99.0 # amd64 + arm64
     restart: always
     depends_on:
       clickhouse:
