@@ -1,4 +1,44 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"]
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "matchCategories": ["ci"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "ci (non-major)",
+      "groupSlug": "ci-non-major"
+    },
+    {
+      "matchCategories": ["ci"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "ci (major)",
+      "groupSlug": "ci-major"
+    },
+    {
+      "matchFileNames": ["charts/**"],
+      "matchCategories": ["helm"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "helm (non-major)",
+      "groupSlug": "helm-non-major"
+    },
+    {
+      "matchFileNames": ["charts/**"],
+      "matchCategories": ["helm"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "helm (major)",
+      "groupSlug": "helm-major"
+    },
+    {
+      "matchCategories": ["docker"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "docker (non-major)",
+      "groupSlug": "docker-non-major"
+    },
+    {
+      "matchCategories": ["docker"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "docker (major)",
+      "groupSlug": "docker-major"
+    }
+  ]
 }
