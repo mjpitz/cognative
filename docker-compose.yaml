@@ -6,7 +6,7 @@ volumes:
 
 services:
   clickhouse:
-    image: clickhouse/clickhouse-server:24.3 # amd64 + arm64
+    image: clickhouse/clickhouse-server:24.4 # amd64 + arm64
     restart: always
     environment:
       CLICKHOUSE_DB: default
@@ -22,7 +22,7 @@ services:
       - clickhouse_data:/var/lib/clickhouse
 
   collector:
-    image: otel/opentelemetry-collector-contrib:0.99.0 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.100.0 # amd64 + arm64
     restart: always
     depends_on:
       clickhouse:
