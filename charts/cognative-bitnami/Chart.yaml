@@ -14,23 +14,23 @@ dependencies:
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.89.0
+    version: 0.90.1
     alias: collector
     condition: collector.enabled
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.89.0
+    version: 0.90.1
     alias: cluster
     condition: cluster.enabled
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.89.0
+    version: 0.90.1
     alias: node
     condition: node.enabled
 
   - name: grafana
     repository: https://grafana.github.io/helm-charts
-    version: 7.3.9
+    version: 7.3.10
     condition: grafana.enabled
