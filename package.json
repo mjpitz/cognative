@@ -5,10 +5,22 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "prettier": "^3.2.5"
   },
   "scripts": {
+    "docker:cert:prep": "mkdir -p docker/traefik/certs",
+    "docker:cert:root": "mkcert -install",
+    "docker:cert:leaf": "mkcert -cert-file docker/traefik/certs/traefik.cert.pem -key-file docker/traefik/certs/traefik.key.pem 'cognative.local.pitz.tech' '*.cognative.local.pitz.tech'",
+    "docker:cert": "concurrently --maxProcesses 1 'npm:docker:cert:*'",
+    "docker:deploy": "docker compose up -d",
+    "docker:teardown": "docker compose rm -fs",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "postinstall": "concurrently 'npm:postinstall:*'",
+    "postinstall:addlicense": "go install github.com/google/addlicense@latest",
+    "postinstall:mkcert": "go install filippo.io/mkcert@latest",
+    "legal": "addlicense -f ./legal/header.txt --ignore 'node_modules/**' --ignore '**/*.ini' --ignore '**/*.yaml' --ignore '**/*.xml' .",
+    "legal:check": "addlicense -check -f ./legal/header.txt --ignore 'node_modules/**' --ignore '**/*.ini' --ignore '**/*.yaml' --ignore '**/*.xml' ."
   }
 }
