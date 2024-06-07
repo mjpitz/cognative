@@ -13,6 +13,37 @@ the company thrive, not just those with experience or hold prior knowledge.
 
 ## Work
 
+**Required Dependencies:**
+
+- Docker
+- Any version of NodeJS (`npm`)
+- Any version of Golang (`go install ...`)
+
+**Initial Setup:**
+
+```shell
+npm install
+```
+
+### Docker
+
+Docker is the primary means of testing out the stack.
+
+```shell
+npm run docker:certs  # <-- one time operation
+npm run docker:deploy # <-- when there are changes to update
+```
+
+**Useful Links:**
+
+All the links below should connect to your local instance. You may need to redeploy systems between changes to have the
+latest changes taken into account.
+
+- https://grafana.cognative.local.pitz.tech/ (for exploring data)
+- https://collector.cognative.local.pitz.tech/ (for OLTP over HTTP)
+- https://minio.cognative.local.pitz.tech/ (administrative, for inspecting data in S3)
+- https://traefik.cognative.local.pitz.tech/ (administrative, for inspecting local routing)
+
 ### Dashboards and Alerting
 
 > :warning: This work still needs a home within the project. Discussions about this solution are ongoing.
@@ -49,5 +80,5 @@ When writing source code for the project, new files will need to include the pro
 intentionally skips common configuration files seen across the project.
 
 ```shell
-addlicense -f ./legal/header.txt -skip ini -skip yaml .
+npm run legal
 ```

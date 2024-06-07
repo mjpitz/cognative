@@ -3,4 +3,6 @@
 charts/*/charts/*.tgz
 charts/*/Chart.lock
 
+docker/traefik/certs
+
 node_modules/

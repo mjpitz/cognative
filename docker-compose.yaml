@@ -4,26 +4,65 @@ volumes:
   grafana_data: {}
 
 services:
+  #==
+  # Supporting Services
+  #==
+
+  traefik:
+    image: traefik:v2.10
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/traefik:/opt/traefik/etc
+    command:
+      - --configFile=/opt/traefik/etc/config.yaml
+    labels:
+      - "traefik.http.routers.traefik.rule=Host(`traefik.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.traefik.service=traefik"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+
   minio:
     image: quay.io/minio/minio:latest # amd64 + arm64
     command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
-    ports:
-      - 9000:9000
-      - 9001:9001
     healthcheck:
       test: mc ready local || exit 1
       interval: 10s
       timeout: 5s
     volumes:
       - minio_data:/data
+    labels:
+      - "traefik.http.routers.minio.rule=Host(`minio.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.minio.service=minio"
+      - "traefik.http.services.minio.loadbalancer.server.port=9001"
+
+  minio-buckets:
+    image: minio/mc
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add minio http://minio:9000 minioadmin minioadmin;
+      /usr/bin/mc mb minio/clickhouse;
+      exit 0;
+      "
+
+  #==
+  # Core Services
+  #==
 
   clickhouse:
     depends_on:
       minio:
         condition: service_healthy
+      minio-buckets:
+        condition: service_completed_successfully
     image: clickhouse/clickhouse-server:24.4 # amd64 + arm64
     environment:
       CLICKHOUSE_DB: default
@@ -49,6 +88,10 @@ services:
       - 4318:4318
     volumes:
       - ./docker/collector:/etc/otelcol-contrib
+    labels:
+      - "traefik.http.routers.collector.rule=Host(`collector.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.collector.service=collector"
+      - "traefik.http.services.collector.loadbalancer.server.port=4318"
 
   # cluster-agent: {}
   # host-agent: {}
@@ -60,8 +103,10 @@ services:
     image: grafana/grafana-oss:10.4.2 # amd64 + arm64
     environment:
       GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
-    ports:
-      - 3000:3000
     volumes:
       - ./docker/grafana:/etc/grafana
       - grafana_data:/var/lib/grafana
+    labels:
+      - "traefik.http.routers.grafana.rule=Host(`grafana.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.grafana.service=grafana"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"

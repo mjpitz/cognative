@@ -1,0 +1,25 @@
+log:
+  level: DEBUG
+
+api:
+  insecure: true
+
+providers:
+  docker: {}
+  file:
+    filename: /opt/traefik/etc/tls.yaml
+    watch: true
+
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entrypoint:
+          to: https
+          scheme: https
+  https:
+    address: ":443"
+    http:
+      tls:
+        options: default

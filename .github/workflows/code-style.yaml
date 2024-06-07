@@ -9,7 +9,8 @@ on:
       - main
 
 jobs:
-  prettier:
+  check:
+    name: Ensure code style
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
