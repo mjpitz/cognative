@@ -1,0 +1,53 @@
+apiVersion: v2
+type: application
+
+# -- Details
+
+name: cognative-s3
+description: |
+  cognative is an opinionated, minimalistic approach to business intelligence 🧠 and operations 🚨. We strongly believe
+  companies should be able to own their own data, and many solutions out there leave organizations to the whims of 
+  third-party providers. Our goal is to reduce the complexity of traditional business intelligence and operations 
+  stacks, while seeking to maximize the efforts of everyday operations staff. This not only simplifies the process for 
+  operators, but also enhances the experience for less infrastructure-aware developers.
+  
+  (BETA) This chart provides an early access preview to the cogantive stack. It currently not suitable for production.
+  I'm hoping to iterate on this stack in the public, and am actively looking for help from others to push it forward.
+
+keywords:
+  - business intelligence
+  - business operations
+  - analytics
+  - monitoring
+  - alerting
+
+version: 0.2403.2
+
+# -- Where can I find additional information about the project?
+
+home: https://mjpitz.github.io/cognative/
+sources:
+  - https://github.com/mjpitz/cognative
+
+# -- Who's behind the project?
+
+maintainers:
+  - name: The cognative authors
+    url: https://github.com/mjpitz/cognative
+
+annotations:
+  artifacthub.io/license: MIT
+  artifacthub.io/signKey: |
+    fingerprint: FD0F1E353074E15A4883BC630FCA5E3C09DFB314
+    url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0fca5e3c09dfb314
+
+# -- What systems make up this chart?
+
+dependencies:
+  - name: minio
+    version: 5.2.0
+    repository: https://charts.min.io/
+
+  - name: cognative
+    repository: https://mya.sh
+    version: 0.2403.2
