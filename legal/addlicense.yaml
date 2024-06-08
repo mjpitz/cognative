@@ -1,0 +1,17 @@
+# -- Ignore common file types, such as configuration files.
+ignorePaths:
+  - "**/*.ini"
+  - "**/*.yaml"
+  - "**/*.xml"
+  - "*.yaml"
+
+# -- Enables support for custom file extensions that aren't natively supported by addlicense.
+fileExtensions: []
+#  - extensions: ["", ""]
+#    top: "/**"
+#    mid: " * "
+#    bot: " */"
+#  - extensions: ["", ""]
+#    top: ""
+#    mid: "// "
+#    bot: ""
