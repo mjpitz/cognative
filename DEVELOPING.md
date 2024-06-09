@@ -39,10 +39,10 @@ npm run docker:deploy # <-- when there are changes to update
 All the links below should connect to your local instance. You may need to redeploy systems between changes to have the
 latest changes taken into account.
 
-- https://grafana.cognative.local.pitz.tech/ (for exploring data)
-- https://collector.cognative.local.pitz.tech/ (for OLTP over HTTP)
-- https://minio.cognative.local.pitz.tech/ (administrative, for inspecting data in S3)
-- https://traefik.cognative.local.pitz.tech/ (administrative, for inspecting local routing)
+- https://grafana.local.cognative.work/ (for exploring data)
+- https://collector.local.cognative.work/ (for OLTP over HTTP)
+- https://minio.local.cognative.work/ (administrative, for inspecting data in S3)
+- https://traefik.local.cognative.work/ (administrative, for inspecting local routing)
 
 ### Dashboards and Alerting
 

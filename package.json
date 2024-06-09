@@ -11,7 +11,7 @@
   "scripts": {
     "docker:cert:prep": "mkdir -p docker/traefik/certs",
     "docker:cert:root": "mkcert -install",
-    "docker:cert:leaf": "mkcert -cert-file docker/traefik/certs/traefik.cert.pem -key-file docker/traefik/certs/traefik.key.pem 'cognative.local.pitz.tech' '*.cognative.local.pitz.tech'",
+    "docker:cert:leaf": "mkcert -cert-file docker/traefik/certs/traefik.cert.pem -key-file docker/traefik/certs/traefik.key.pem 'local.cognative.work' '*.local.cognative.work'",
     "docker:cert": "concurrently --maxProcesses 1 'npm:docker:cert:*'",
     "docker:deploy": "docker compose up -d",
     "docker:teardown": "docker compose rm -fs",

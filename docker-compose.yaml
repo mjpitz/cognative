@@ -20,7 +20,7 @@ services:
     command:
       - --configFile=/opt/traefik/etc/config.yaml
     labels:
-      - "traefik.http.routers.traefik.rule=Host(`traefik.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.local.cognative.work`)"
       - "traefik.http.routers.traefik.service=traefik"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
 
@@ -37,7 +37,7 @@ services:
     volumes:
       - minio_data:/data
     labels:
-      - "traefik.http.routers.minio.rule=Host(`minio.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.minio.rule=Host(`minio.local.cognative.work`)"
       - "traefik.http.routers.minio.service=minio"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
 
@@ -89,7 +89,7 @@ services:
     volumes:
       - ./docker/collector:/etc/otelcol-contrib
     labels:
-      - "traefik.http.routers.collector.rule=Host(`collector.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.collector.rule=Host(`collector.local.cognative.work`)"
       - "traefik.http.routers.collector.service=collector"
       - "traefik.http.services.collector.loadbalancer.server.port=4318"
 
@@ -107,6 +107,6 @@ services:
       - ./docker/grafana:/etc/grafana
       - grafana_data:/var/lib/grafana
     labels:
-      - "traefik.http.routers.grafana.rule=Host(`grafana.cognative.local.pitz.tech`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.local.cognative.work`)"
       - "traefik.http.routers.grafana.service=grafana"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
