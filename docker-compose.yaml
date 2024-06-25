@@ -9,7 +9,7 @@ services:
   #==
 
   traefik:
-    image: traefik:v2.10
+    image: traefik:v2.11
     restart: always
     ports:
       - 80:80
@@ -63,7 +63,7 @@ services:
         condition: service_healthy
       minio-buckets:
         condition: service_completed_successfully
-    image: clickhouse/clickhouse-server:24.4 # amd64 + arm64
+    image: clickhouse/clickhouse-server:24.5 # amd64 + arm64
     environment:
       CLICKHOUSE_DB: default
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
@@ -82,7 +82,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: otel/opentelemetry-collector-contrib:0.100.0 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.103.1 # amd64 + arm64
     ports:
       - 4317:4317
       - 4318:4318
@@ -100,7 +100,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: grafana/grafana-oss:10.4.2 # amd64 + arm64
+    image: grafana/grafana-oss:10.4.5 # amd64 + arm64
     environment:
       GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
     volumes:
