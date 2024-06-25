@@ -50,4 +50,4 @@ dependencies:
 
   - name: cognative
     repository: https://mya.sh
-    version: 0.2403.2
+    version: 0.2403.3
