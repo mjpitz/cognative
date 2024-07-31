@@ -23,11 +23,22 @@ Traditional approaches to observability, operations, and business intelligence t
 distinct. This often results in several, different technology stacks, often dramatically increasing the demand and
 requirements of your on-call staff.
 
+**Benefits**
+
+- Access and analyze all your organizations business data, in a single location.
+- Configure tiered storage once for all your logs, metrics, traces, and wide events.
+- Reduced overhead for operators and developers alike, simplifying the testing process.
+
+**Still not convinced?**
+
+- Give Cognative a try by following one of our [Getting Started](docs/QUICKSTART.md) guides.
+- See our documentation on [alternatives](docs/ALTERNATIVES.md) for more information.
+
 ## Technologies
 
 Cognative is intended to provide a base layer that your company can build on top of. Want to add a queue before your
 data hits the warehouse? Feel free to add which ever queuing technology your organization prefers. Cognative is a
-[portmanteau][] that takes an acronym of the technologies involved (COG, listed below) and the term "native" which means
+[portmanteau][] that takes an acronym of the technologies involved (listed below) and the suffix "native" which means
 "of indigenous origin or growth".
 
 [portmanteau]: https://www.merriam-webster.com/dictionary/portmanteau
@@ -69,29 +80,6 @@ on-call solutions like PagerDuty, OpsGenie, BetterStack, and many more.
 </td>
 </tr>
 </table>
-
-## Alternatives
-
-_Prometheus Stack - LGTM/P Stack_
-
-By far the most popular solution in open source today, Prometheus makes it easy for anyone to instrument their systems.
-It's been around for a long time and has a lot of community support. However, Prometheus (metrics), Loki (logs), Tempo
-(traces), and Mimir (metrics) all handle similar kinds of information, but storage and configuration varies between each
-solution, making it a PITA to maintain and administer.
-
-While the [LGTM/P][] stack works well for logs, traces, and metrics, it falls short for business intelligence.
-
-[LGTM/P]: https://grafana.com/go/webinar/getting-started-with-grafana-lgtm-stack/
-
-_Elastic Stack - ELK_
-
-The [ElasticStack][], more commonly referred to as ELK, is a fairly popular stack that used in a number of different
-fields. The ELK stack is certainly closer to a more modern observability, operations, and business intelligence stack,
-however, it can be fairly expensive to run, and the stack lacks necessary collector components for metrics and traces.
-Furthermore, there's a lot of hesitancy and skepticism from the open source community when produce whose license
-recently change get involved.
-
-[ElasticStack]: https://www.elastic.co/elastic-stack
 
 ## License
 
