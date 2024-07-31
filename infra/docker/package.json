@@ -11,6 +11,8 @@
     "docker:cert:leaf": "mkcert -cert-file traefik/certs/traefik.cert.pem -key-file traefik/certs/traefik.key.pem '*.local.cognative.work' 'local.cognative.work'",
     "docker:cert": "concurrently --maxProcesses 1 'npm:docker:cert:*'",
     "docker:deploy": "docker compose up -d",
-    "docker:teardown": "docker compose rm -fs"
+    "docker:teardown": "docker compose rm -fs",
+    "postinstall": "concurrently 'npm:postinstall:*'",
+    "postinstall:mkcert": "GOBIN=$PWD/node_modules/.bin go install filippo.io/mkcert@latest"
   }
 }
