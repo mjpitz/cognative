@@ -1,3 +1,5 @@
+name: cognative
+
 volumes:
   minio_data: {}
   clickhouse_data: {}
@@ -16,7 +18,7 @@ services:
       - 443:443
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./docker/traefik:/opt/traefik/etc
+      - ./traefik:/opt/traefik/etc
     command:
       - --configFile=/opt/traefik/etc/config.yaml
     labels:
@@ -75,7 +77,7 @@ services:
       timeout: 3s
       retries: 5
     volumes:
-      - ./docker/clickhouse:/etc/clickhouse-server/config.d
+      - ./clickhouse:/etc/clickhouse-server/config.d
       - clickhouse_data:/var/lib/clickhouse
 
   collector:
@@ -87,7 +89,7 @@ services:
       - 4317:4317
       - 4318:4318
     volumes:
-      - ./docker/collector:/etc/otelcol-contrib
+      - ./collector:/etc/otelcol-contrib
     labels:
       - "traefik.http.routers.collector.rule=Host(`collector.local.cognative.work`)"
       - "traefik.http.routers.collector.service=collector"
@@ -104,7 +106,7 @@ services:
     environment:
       GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
     volumes:
-      - ./docker/grafana:/etc/grafana
+      - ./grafana:/etc/grafana
       - grafana_data:/var/lib/grafana
     labels:
       - "traefik.http.routers.grafana.rule=Host(`grafana.local.cognative.work`)"

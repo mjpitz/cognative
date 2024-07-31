@@ -1,0 +1,8 @@
+{
+  "name": "@cognative/assets-i18n",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

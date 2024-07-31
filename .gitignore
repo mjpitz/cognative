@@ -1,8 +1,7 @@
-/.idea
-
-charts/*/charts/*.tgz
-charts/*/Chart.lock
-
-docker/traefik/certs
-
+.idea/
 node_modules/
+
+infra/charts/*/charts/*.tgz
+infra/charts/*/Chart.lock
+
+infra/**/*.pem

@@ -52,7 +52,7 @@ latest changes taken into account.
 
 ### Helm Charts
 
-[`charts`](charts) currently contains a collection of charts that are currently a work in progress. The working version
+[`charts`](../infra/charts) currently contains a collection of charts that are currently a work in progress. The working version
 of the `cognative` chart can be found over on [mya.sh](https://mya.sh/charts).
 
 ```shell
@@ -62,7 +62,7 @@ helm upgrade -i cognative mya/cognative
 
 ### Public Website
 
-The contents of the [public website][] can be found in the [`docs`](docs) directory.
+The contents of the [public website][] can be found in the [`docs`]() directory.
 
 [public website]: https://mjpitz.github.io/cognative/
 
