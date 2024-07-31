@@ -4,27 +4,32 @@
 <img width="300" alt="cognative" title="cognative" src="assets/images/originals/logo.png"/>
 
 A modern approach to observability, operations, and business intelligence.
-<br/>
 
 [![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
 [![System architecture][]](docs/ARCHITECTURE.md)
 [![Developers guide][]](docs/DEVELOPING.md)
 
 [Documentation]: https://img.shields.io/badge/documentation-gray?style=for-the-badge
-[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-yellow?style=for-the-badge
-[System architecture]: https://img.shields.io/badge/system_architecture-027FFF?style=for-the-badge
+[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-027FFF?style=for-the-badge
+[System architecture]: https://img.shields.io/badge/system_architecture-yellow?style=for-the-badge
 [Developers guide]: https://img.shields.io/badge/developers_guide-FF0000?style=for-the-badge
 
 </div>
 
-## Background
+## Overview
 
 Traditional approaches to observability, operations, and business intelligence treat these concerns as separate and
 distinct. This often results in several, different technology stacks, often dramatically increasing the demand and
 requirements of your on-call staff.
 
+Cognative deploys a turn-key solution that centralize your log, metric, trace, and wide-event data into a common store
+and exposes them for analysis behind a single pane of glass. Traditional approaches often require engineering effort to
+centralize data from numerous, distinct sources into a common location. This results in toil and requires further
+maintenance as the organization grows. Cognative removes this toil by centralizing the data FIRST.
+
 **Benefits**
 
+- Easily deploy a preconfigured instance of the stack and connect all relevant services.
 - Access and analyze all your organizations business data, in a single location.
 - Configure tiered storage once for all your logs, metrics, traces, and wide events.
 - Reduced overhead for operators and developers alike, simplifying the testing process.
@@ -80,6 +85,19 @@ on-call solutions like PagerDuty, OpsGenie, BetterStack, and many more.
 </td>
 </tr>
 </table>
+<br/>
+
+**Why not just use these systems directly?**
+
+While you _could_ deploy each of these systems independently, they require a significant amount of expertise and
+knowledge of how the underlying systems work to get things connected properly. Our deployment takes care of a bulk of
+this heavy lifting for you by automatically taping sources for information. For example, our Kubernetes deployment
+automatically taps the control plane and kubelet for metrics, and nodes for logs.
+
+For more information about how the systems in the cognative stack interact with one another and the configuration
+involved, take a look at our [architecture](docs/ARCHITECTURE.md) document for more information. This document also
+illustrates how you can leverage cloud deployments in the event that your company does not want to run certain systems
+themselves.
 
 ## License
 
