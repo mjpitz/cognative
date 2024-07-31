@@ -83,10 +83,6 @@ on-call solutions like PagerDuty, OpsGenie, BetterStack, and many more.
 
 ## License
 
-While there isn't any code involved in the project, it seemed prudent to include a license of some kind. We can always
-be more permissive with our licensing, but I wanted to start from a somewhat restricted standpoint given my experience
-open source organizations and communities.
-
 ```text
 Copyright (C) 2024 The cognative authors
 
