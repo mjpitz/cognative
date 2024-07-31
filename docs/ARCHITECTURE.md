@@ -134,20 +134,22 @@ This illustrates the high-level communication pattern between the various actors
 
 ```mermaid
 flowchart TD
-    database[postgres, mysql, ...]
-
-    grafana -- live product data --> database
-    clickhouse -- snapshot product data from --> database
-
-    grafana -- intelligence + observability --> clickhouse
-    collector --> clickhouse
-
-    cluster-agent -- oltp --> collector
-    node-agent -- oltp --> collector
-    prometheus-agent -. oltp .-> collector
-    app -. oltp .-> collector
-
-    prometheus-agent -. scrapes /metrics .-> app
+    subgraph Kubernetes
+      database[postgres, mysql, ...]
+  
+      grafana -- live product data --> database
+      clickhouse -- snapshot product data from --> database
+  
+      grafana -- intelligence + observability --> clickhouse
+      collector --> clickhouse
+  
+      cluster-agent -- oltp --> collector
+      node-agent -- oltp --> collector
+      prometheus-agent -. oltp .-> collector
+      app -. oltp .-> collector
+  
+      prometheus-agent -. scrapes /metrics .-> app
+    end
 ```
 
 ### Cloud-hosted
@@ -155,7 +157,7 @@ flowchart TD
 For those who prefer cloud-hosted solutions, both Grafana and ClickHouse offer a cloud-hosted version of their system.
 
 ```mermaid
-flowchart TD
+flowchart LR
     subgraph Cloud Provider
         database[postgres, mysql, ...]
 
