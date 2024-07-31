@@ -136,18 +136,18 @@ This illustrates the high-level communication pattern between the various actors
 flowchart TD
     subgraph Kubernetes
       database[postgres, mysql, ...]
-  
+
       grafana -- live product data --> database
       clickhouse -- snapshot product data from --> database
-  
+
       grafana -- intelligence + observability --> clickhouse
       collector --> clickhouse
-  
+
       cluster-agent -- oltp --> collector
       node-agent -- oltp --> collector
       prometheus-agent -. oltp .-> collector
       app -. oltp .-> collector
-  
+
       prometheus-agent -. scrapes /metrics .-> app
     end
 ```

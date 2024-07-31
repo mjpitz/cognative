@@ -5,14 +5,18 @@
 
 A modern approach to observability, operations, and business intelligence.
 
-[![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
-[![System architecture][]](docs/ARCHITECTURE.md)
-[![Developers guide][]](docs/DEVELOPING.md)
+[![Getting Started][]](docs/QUICKSTART.md)
+[![Architecture][]](docs/ARCHITECTURE.md)
+[![Developers Guide][]](docs/DEVELOPING.md)
 
-[Documentation]: https://img.shields.io/badge/documentation-gray?style=for-the-badge
-[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-027FFF?style=for-the-badge
-[System architecture]: https://img.shields.io/badge/system_architecture-yellow?style=for-the-badge
-[Developers guide]: https://img.shields.io/badge/developers_guide-FF0000?style=for-the-badge
+[![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
+[![Alternatives][]](docs/ALTERNATIVES.md)
+
+[Getting Started]: https://img.shields.io/badge/getting_started-027FFF?style=for-the-badge
+[Architecture]: https://img.shields.io/badge/architecture-yellow?style=for-the-badge
+[Developers Guide]: https://img.shields.io/badge/developers_guide-FF0000?style=for-the-badge
+[Join the discussion!]: https://img.shields.io/badge/join_the_discussion!-gray?style=for-the-badge
+[Alternatives]: https://img.shields.io/badge/alternatives-gray?style=for-the-badge
 
 </div>
 
@@ -32,7 +36,7 @@ maintenance as the organization grows. Cognative removes this toil by centralizi
 - Easily deploy a preconfigured instance of the stack that connects all relevant services.
 - Access and analyze all your organizations business data, in a single location.
 - Configure tiered storage (hot, warm, and cold) for all your logs, metrics, traces, and wide events ONCE.
-- Reduced overhead for operators and developers alike, simplifying the development and testing processes.
+- Less overhead for operators and developers alike, simplifying the development and testing processes.
 
 **Still not convinced?**
 
@@ -41,10 +45,8 @@ maintenance as the organization grows. Cognative removes this toil by centralizi
 
 ## Technologies
 
-Cognative is intended to provide a base layer that your company can build on top of. Want to add a queue before your
-data hits the warehouse? Feel free to add which ever queuing technology your organization prefers. Cognative is a
-[portmanteau][] that takes an acronym of the technologies involved (listed below) and the suffix "native" from the
-"cloud native" space, meaning "of indigenous origin".
+Cognative is a [portmanteau][] that uses an acronym of the technologies involved (listed below) and the suffix "native"
+from the "cloud native" space, meaning "of indigenous origin".
 
 [portmanteau]: https://www.merriam-webster.com/dictionary/portmanteau
 
@@ -87,6 +89,9 @@ on-call solutions like PagerDuty, OpsGenie, BetterStack, and many more.
 </table>
 <br/>
 
+Cognative provides a base layer that your company can build on top of. Want to add a queue before your data hits the
+warehouse? Feel free to add which ever queuing technology your organization prefers.
+
 **Why not just use these systems directly?**
 
 While you _could_ deploy each of these systems independently, they require a significant amount of expertise and
@@ -95,7 +100,7 @@ this heavy lifting for you by automatically tapping sources for information. For
 cluster agent which pulls metrics and information from the Kubernetes control plane. Our node agent automatically ships
 logs and pulls metrics from the Kubelet agent running on each host.
 
-To get a better idea of what comes with the cognative system, take a look at our [architecture][] documentation. It
+To get a better idea of what comes with the Cognative system, take a look at our [architecture][] documentation. It
 illustrates both on-prem style deployments and how you may leverage cloud services (such as [Grafana Cloud][],
 [ClickHouse Cloud][], or [Altinity][]) in place of running the systems yourself.
 

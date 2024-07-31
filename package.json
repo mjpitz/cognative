@@ -16,6 +16,7 @@
     "postinstall": "concurrently 'npm:postinstall:*'",
     "postinstall:addlicense": "GOBIN=$PWD/node_modules/.bin go install github.com/nokia/addlicense@latest",
     "legal": "addlicense -s -f legal/header.txt -config legal/addlicense.yaml .",
-    "legal:check": "addlicense -check -s -f legal/header.txt -config legal/addlicense.yaml ."
+    "legal:check": "addlicense -check -s -f legal/header.txt -config legal/addlicense.yaml .",
+    "check": "concurrently 'npm:*:check'"
   }
 }
