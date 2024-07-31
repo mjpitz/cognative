@@ -22,17 +22,17 @@ Traditional approaches to observability, operations, and business intelligence t
 distinct. This often results in several, different technology stacks, often dramatically increasing the demand and
 requirements of your on-call staff.
 
-Cognative deploys a turn-key solution that centralize your log, metric, trace, and wide-event data into a common store
-and exposes them for analysis behind a single pane of glass. Traditional approaches often require engineering effort to
+Cognative deploys a turn-key solution that centralizes log, metric, trace, and wide-event data into a common store and
+exposes them for analysis behind a single pane of glass. Traditional approaches often require engineering effort to
 centralize data from numerous, distinct sources into a common location. This results in toil and requires further
 maintenance as the organization grows. Cognative removes this toil by centralizing the data FIRST.
 
 **Benefits**
 
-- Easily deploy a preconfigured instance of the stack and connect all relevant services.
+- Easily deploy a preconfigured instance of the stack that connects all relevant services.
 - Access and analyze all your organizations business data, in a single location.
-- Configure tiered storage once for all your logs, metrics, traces, and wide events.
-- Reduced overhead for operators and developers alike, simplifying the testing process.
+- Configure tiered storage (hot, warm, and cold) for all your logs, metrics, traces, and wide events ONCE.
+- Reduced overhead for operators and developers alike, simplifying the development and testing processes.
 
 **Still not convinced?**
 
@@ -43,8 +43,8 @@ maintenance as the organization grows. Cognative removes this toil by centralizi
 
 Cognative is intended to provide a base layer that your company can build on top of. Want to add a queue before your
 data hits the warehouse? Feel free to add which ever queuing technology your organization prefers. Cognative is a
-[portmanteau][] that takes an acronym of the technologies involved (listed below) and the suffix "native" which means
-"of indigenous origin or growth".
+[portmanteau][] that takes an acronym of the technologies involved (listed below) and the suffix "native" from the
+"cloud native" space, meaning "of indigenous origin".
 
 [portmanteau]: https://www.merriam-webster.com/dictionary/portmanteau
 
@@ -53,8 +53,8 @@ data hits the warehouse? Feel free to add which ever queuing technology your org
 <td width="120"><img width="96" height="64" alt="ClickHouse" title="ClickHouse" src="https://www.percona.com/blog/wp-content/uploads/2017/10/ClickHouse-MySQL.png" /></td>
 <td>
 
-[_Clickhouse_][clickhouse] is our data warehouse layer. It stores logs, metrics, traces, as well as other business
-related data sets. Clickhouse also comes with tons of integrations which makes it easy to source data from a variety
+[_ClickHouse_][clickhouse] is our data warehouse layer. It stores logs, metrics, traces, as well as other business
+related data sets. ClickHouse also comes with tons of integrations which makes it easy to source data from a variety
 of locations.
 
 [clickhouse]: https://clickhouse.com/
@@ -91,13 +91,18 @@ on-call solutions like PagerDuty, OpsGenie, BetterStack, and many more.
 
 While you _could_ deploy each of these systems independently, they require a significant amount of expertise and
 knowledge of how the underlying systems work to get things connected properly. Our deployment takes care of a bulk of
-this heavy lifting for you by automatically taping sources for information. For example, our Kubernetes deployment
-automatically taps the control plane and kubelet for metrics, and nodes for logs.
+this heavy lifting for you by automatically tapping sources for information. For example, our Helm chart deploys a
+cluster agent which pulls metrics and information from the Kubernetes control plane. Our node agent automatically ships
+logs and pulls metrics from the Kubelet agent running on each host.
 
-For more information about how the systems in the cognative stack interact with one another and the configuration
-involved, take a look at our [architecture](docs/ARCHITECTURE.md) document for more information. This document also
-illustrates how you can leverage cloud deployments in the event that your company does not want to run certain systems
-themselves.
+To get a better idea of what comes with the cognative system, take a look at our [architecture][] documentation. It
+illustrates both on-prem style deployments and how you may leverage cloud services (such as [Grafana Cloud][],
+[ClickHouse Cloud][], or [Altinity][]) in place of running the systems yourself.
+
+[architecture]: docs/ARCHITECTURE.md
+[Grafana Cloud]: https://grafana.com/products/cloud/
+[ClickHouse Cloud]: https://clickhouse.com/cloud
+[Altinity]: https://altinity.com/managed-clickhouse/
 
 ## License
 
