@@ -65,7 +65,7 @@ services:
         condition: service_healthy
       minio-buckets:
         condition: service_completed_successfully
-    image: clickhouse/clickhouse-server:24.7 # amd64 + arm64
+    image: clickhouse/clickhouse-server:24.8 # amd64 + arm64
     environment:
       CLICKHOUSE_DB: otel
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
@@ -84,7 +84,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: otel/opentelemetry-collector-contrib:0.106.1 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.109.0 # amd64 + arm64
     ports:
       - 4317:4317
       - 4318:4318
@@ -102,7 +102,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: grafana/grafana-oss:11.1.3 # amd64 + arm64
+    image: grafana/grafana-oss:11.2.0 # amd64 + arm64
     environment:
       GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
     volumes:
