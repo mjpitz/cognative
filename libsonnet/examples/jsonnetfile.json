@@ -1,0 +1,15 @@
+{
+  "dependencies": [
+    {
+      "source": {
+        "git": {
+          "remote": "https://github.com/mjpitz/cognative.git",
+          "subdir": "libsonnet/v1.0.0"
+        }
+      },
+      "version": "main"
+    }
+  ],
+  "legacyImports": true,
+  "version": 1
+}
