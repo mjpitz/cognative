@@ -4,7 +4,7 @@
   "private": true,
   "license": "AGPL-3.0-only",
   "devDependencies": {
-    "concurrently": "^8.2.2",
+    "concurrently": "^9.0.0",
     "prettier": "^3.2.5"
   },
   "scripts": {
