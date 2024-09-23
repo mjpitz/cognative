@@ -6,7 +6,17 @@
         },
 
         Sum(builder): (importstr "templates/sum.sql") % {},
-        Gauge(builder): (importstr "templates/gauge.sql") % {},
+
+        Gauge(builder): (importstr "templates/gauge.sql") % {
+            select: std.join(", ", std.map(function(name) "Attributes['%{name}'] as %{name}" % {name: name}, builder.columns)),
+            selected: std.join(", ", builder.columns),
+            interval: builder.interval,
+            table: builder.table,
+            metric: builder.metric,
+            startTime: builder.startTime,
+            endTime: builder.endTime,
+            conditions: std.join("\n", builder.conditions),
+        },
 
         New(): {
             metric: '',
@@ -15,7 +25,6 @@
             conditions: [],
             startTime: '$__fromTime',
             endTime: '$__toTime',
-            groups: [],
             interval: 300,
         },
 
@@ -38,10 +47,6 @@
         Range(start, end): {
             startTime: start,
             endTime: end,
-        },
-
-        GroupBy(groups): {
-            groups+: groups,
         },
 
         Interval(interval): {
