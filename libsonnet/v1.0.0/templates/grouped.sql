@@ -1,6 +1,6 @@
-SELECT %(groups), UsageTime, sum(Usage) Usage
+SELECT %(groups)s, UsageTime, sum(Usage) Usage
 FROM (
-    %(query)
+    %(query)s
 ) as grouped
-GROUP BY UsageTime, %(groups)
-ORDER BY %(groups), UsageTime
+GROUP BY UsageTime, %(groups)s
+ORDER BY %(groups)s, UsageTime
