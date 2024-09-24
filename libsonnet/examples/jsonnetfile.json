@@ -7,7 +7,7 @@
           "subdir": "libsonnet/v1.0.0"
         }
       },
-      "version": "main"
+      "version": "mya/jsonnet"
     }
   ],
   "legacyImports": true,

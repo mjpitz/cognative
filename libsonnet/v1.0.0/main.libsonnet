@@ -8,14 +8,14 @@
         Sum(builder): (importstr "templates/sum.sql") % {},
 
         Gauge(builder): (importstr "templates/gauge.sql") % {
-            select: std.join(", ", std.map(function(name) "Attributes['%{name}'] as %{name}" % {name: name}, builder.columns)),
+            select: std.join(", ", std.map(function(name) "Attributes['%(name)s'] as %(name)s" % {name: name}, builder.columns)),
             selected: std.join(", ", builder.columns),
             interval: builder.interval,
             table: builder.table,
             metric: builder.metric,
             startTime: builder.startTime,
             endTime: builder.endTime,
-            conditions: std.join("\n", builder.conditions),
+            conditions: std.lines(builder.conditions),
         },
 
         New(): {
