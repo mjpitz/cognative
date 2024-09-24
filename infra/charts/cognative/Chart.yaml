@@ -55,7 +55,7 @@ dependencies:
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.106.0
+    version: 0.106.1
     alias: collector
     condition: collector.enabled
 
@@ -63,7 +63,7 @@ dependencies:
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.106.0
+    version: 0.106.1
     alias: cluster
     condition: cluster.enabled
 
@@ -71,7 +71,7 @@ dependencies:
 
   - name: opentelemetry-collector
     repository: https://open-telemetry.github.io/opentelemetry-helm-charts
-    version: 0.106.0
+    version: 0.106.1
     alias: node
     condition: node.enabled
 
