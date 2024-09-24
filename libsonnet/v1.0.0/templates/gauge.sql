@@ -1,13 +1,13 @@
 -- THIS IS A COPY-PASTE FROM https://github.com/JustinMason/opentelemetry-collector-exporter-client
 -- Needs to be updated for proper templating in jsonnet.
 
-SELECT %{select},
-    toDateTime(intDiv(toUInt32(TimeUnix), %{interval}) * %{interval}) AS UsageTime,
+SELECT %(select)s,
+    toDateTime(intDiv(toUInt32(TimeUnix), %(interval)d) * %(interval)d) AS UsageTime,
     avg(Value)/1e6 as Usage
-FROM %{table}
-WHERE MetricName = '%{metric}'
-AND TimeUnix BETWEEN (toDateTime('%{startTime}') - INTERVAL %{interval} SECOND) AND toDateTime('%{endTime}')
+FROM %(table)s
+WHERE MetricName = '%(metric)s'
+AND TimeUnix BETWEEN (toDateTime('%(startTime)s') - INTERVAL %(interval)d SECOND) AND toDateTime('%(endTime)s')
 AND NOT isNaN(Value)
-%{conditions}
-GROUP BY UsageTime, %{selected}
+%(conditions)s
+GROUP BY UsageTime, %(selected)
 ORDER BY UsageTime
