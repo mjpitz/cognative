@@ -1,0 +1,128 @@
+apiVersion: v1
+entries:
+  clickhouse:
+  - annotations:
+      artifacthub.io/license: MIT
+      artifacthub.io/signKey: |
+        fingerprint: FD0F1E353074E15A4883BC630FCA5E3C09DFB314
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0fca5e3c09dfb314
+    apiVersion: v2
+    created: "2024-11-16T14:26:01.837173002Z"
+    description: '(BETA) Deploy a standalone Clickhouse instance. ClickHouse is a
+      high-performance, column-oriented SQL database  management system (DBMS) for
+      online analytical processing (OLAP). '
+    digest: b0f6a4a1930f83ab594dc743e8b5016dbe4f212b9fb35cab82c300f939cb314d
+    maintainers:
+    - name: The cognative authors
+      url: https://github.com/mjpitz/cognative
+    name: clickhouse
+    type: application
+    urls:
+    - https://github.com/mjpitz/cognative/releases/download/clickhouse-0.2403.1/clickhouse-0.2403.1.tgz
+    version: 0.2403.1
+  cognative:
+  - annotations:
+      artifacthub.io/license: MIT
+      artifacthub.io/signKey: |
+        fingerprint: FD0F1E353074E15A4883BC630FCA5E3C09DFB314
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0fca5e3c09dfb314
+    apiVersion: v2
+    created: "2024-11-16T14:26:01.965935697Z"
+    dependencies:
+    - condition: clickhouse.enabled
+      name: clickhouse
+      repository: https://mya.sh
+      version: 0.2403.1
+    - alias: collector
+      condition: collector.enabled
+      name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.109.0
+    - alias: cluster
+      condition: cluster.enabled
+      name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.109.0
+    - alias: node
+      condition: node.enabled
+      name: opentelemetry-collector
+      repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+      version: 0.109.0
+    - condition: grafana.enabled
+      name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 8.6.0
+    description: "cognative is an opinionated, minimalistic approach to business intelligence
+      \U0001F9E0 and operations \U0001F6A8. We strongly believe companies should be
+      able to own their own data, and many solutions out there leave organizations
+      to the whims of  third-party providers. Our goal is to reduce the complexity
+      of traditional business intelligence and operations  stacks, while seeking to
+      maximize the efforts of everyday operations staff. This not only simplifies
+      the process for  operators, but also enhances the experience for less infrastructure-aware
+      developers.  (BETA) This chart provides an early access preview to the cogantive
+      stack. It currently not suitable for production. I'm hoping to iterate on this
+      stack in the public, and am actively looking for help from others to push it
+      forward. "
+    digest: 21fdea4f77d7fcc0e582e6d931e69b252fd951381e23194e3de8073900bf4fbd
+    home: https://mjpitz.github.io/cognative/
+    keywords:
+    - business intelligence
+    - business operations
+    - analytics
+    - monitoring
+    - alerting
+    maintainers:
+    - name: The cognative authors
+      url: https://github.com/mjpitz/cognative
+    name: cognative
+    sources:
+    - https://github.com/mjpitz/cognative
+    type: application
+    urls:
+    - https://github.com/mjpitz/cognative/releases/download/cognative-0.2403.3/cognative-0.2403.3.tgz
+    version: 0.2403.3
+  cognative-s3:
+  - annotations:
+      artifacthub.io/license: MIT
+      artifacthub.io/signKey: |
+        fingerprint: FD0F1E353074E15A4883BC630FCA5E3C09DFB314
+        url: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x0fca5e3c09dfb314
+    apiVersion: v2
+    created: "2024-11-16T14:26:02.100650159Z"
+    dependencies:
+    - name: minio
+      repository: https://charts.min.io/
+      version: 5.3.0
+    - name: cognative
+      repository: https://mya.sh
+      version: 0.2403.3
+    description: "cognative is an opinionated, minimalistic approach to business intelligence
+      \U0001F9E0 and operations \U0001F6A8. We strongly believe companies should be
+      able to own their own data, and many solutions out there leave organizations
+      to the whims of  third-party providers. Our goal is to reduce the complexity
+      of traditional business intelligence and operations  stacks, while seeking to
+      maximize the efforts of everyday operations staff. This not only simplifies
+      the process for  operators, but also enhances the experience for less infrastructure-aware
+      developers.  (BETA) This chart provides an early access preview to the cogantive
+      stack. It currently not suitable for production. I'm hoping to iterate on this
+      stack in the public, and am actively looking for help from others to push it
+      forward. "
+    digest: 8627416ea09b360e5702ba82d674e9d1adb97f39be494cd46a993709cd5f8b6f
+    home: https://mjpitz.github.io/cognative/
+    keywords:
+    - business intelligence
+    - business operations
+    - analytics
+    - monitoring
+    - alerting
+    maintainers:
+    - name: The cognative authors
+      url: https://github.com/mjpitz/cognative
+    name: cognative-s3
+    sources:
+    - https://github.com/mjpitz/cognative
+    type: application
+    urls:
+    - https://github.com/mjpitz/cognative/releases/download/cognative-s3-0.2403.2/cognative-s3-0.2403.2.tgz
+    version: 0.2403.2
+generated: "2024-11-16T14:26:02.100659397Z"
