@@ -52,12 +52,11 @@ latest changes taken into account.
 
 ### Helm Charts
 
-[`charts`](../infra/charts) currently contains a collection of charts that are currently a work in progress. The working version
-of the `cognative` chart can be found over on [mya.sh](https://mya.sh/charts).
+[`charts`](../infra/charts) currently contains a collection of charts that are currently a work in progress.
 
 ```shell
-helm repo add mya https://mya.sh
-helm upgrade -i cognative mya/cognative
+helm repo add cognative https://cognative.work
+helm upgrade -i cognative cognative/cognative
 ```
 
 ### Public Website

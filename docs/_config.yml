@@ -1,4 +1,6 @@
-# Global
+title: Cognative
+description: A modern approach to observability, operations, and business intelligence.
+
 include:
   - index.yaml
 

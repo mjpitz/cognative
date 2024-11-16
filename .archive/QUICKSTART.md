@@ -24,10 +24,7 @@ pnpm docker:deploy
 
 ### Kubernetes
 
-Currently, the [Helm](https://helm.sh) charts for deploying Cognative are hosted out of my personal Helm repository.
-This repository contains a few more deployment configurations as means to demonstrate a variety of configurations.
-
 ```shell
-helm repo add mya https://mya.sh
-helm upgrade -i cognative mya/cognative
+helm repo add cognative https://cognative.work
+helm upgrade -i cognative cognative/cognative
 ```
