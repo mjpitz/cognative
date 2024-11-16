@@ -1,1 +1,5 @@
-theme: cayman
+# Global
+include:
+  - index.yaml
+
+# Build
