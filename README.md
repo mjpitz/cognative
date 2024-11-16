@@ -5,12 +5,12 @@
 
 A modern approach to observability, operations, and business intelligence.
 
-[![Getting Started][]](docs/QUICKSTART.md)
-[![Architecture][]](docs/ARCHITECTURE.md)
-[![Developers Guide][]](docs/DEVELOPING.md)
+[![Getting Started][]](.archive/QUICKSTART.md)
+[![Architecture][]](.archive/ARCHITECTURE.md)
+[![Developers Guide][]](.archive/DEVELOPING.md)
 
 [![Join the discussion!][]](https://github.com/mjpitz/cognative/discussions)
-[![Alternatives][]](docs/ALTERNATIVES.md)
+[![Alternatives][]](.archive/ALTERNATIVES.md)
 
 [Getting Started]: https://img.shields.io/badge/getting_started-027FFF?style=for-the-badge
 [Architecture]: https://img.shields.io/badge/architecture-yellow?style=for-the-badge
@@ -40,8 +40,8 @@ maintenance as the organization grows. Cognative removes this toil by centralizi
 
 **Still not convinced?**
 
-- Give Cognative a try by following one of our [Getting Started](docs/QUICKSTART.md) guides.
-- See our documentation on [alternatives](docs/ALTERNATIVES.md) for more information.
+- Give Cognative a try by following one of our [Getting Started](.archive/QUICKSTART.md) guides.
+- See our documentation on [alternatives](.archive/ALTERNATIVES.md) for more information.
 
 ## Technologies
 
@@ -104,7 +104,7 @@ To get a better idea of what comes with the Cognative system, take a look at our
 illustrates both on-prem style deployments and how you may leverage cloud services (such as [Grafana Cloud][],
 [ClickHouse Cloud][], or [Altinity][]) in place of running the systems yourself.
 
-[architecture]: docs/ARCHITECTURE.md
+[architecture]: .archive/ARCHITECTURE.md
 [Grafana Cloud]: https://grafana.com/products/cloud/
 [ClickHouse Cloud]: https://clickhouse.com/cloud
 [Altinity]: https://altinity.com/managed-clickhouse/

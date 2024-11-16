@@ -3,3 +3,6 @@ owner: mjpitz
 git-repo: cognative
 sign: true
 key: Mya Pitzeruse
+generate-release-notes: true
+pages-branch: main
+pages-index-path: /docs/index.yaml
