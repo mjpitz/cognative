@@ -2,8 +2,10 @@
 ignorePaths:
   - "**/*.ini"
   - "**/*.yaml"
+  - "**/*.yml"
   - "**/*.xml"
   - "*.yaml"
+  - "*.yml"
 
 # -- Enables support for custom file extensions that aren't natively supported by addlicense.
 fileExtensions: []
