@@ -13,7 +13,7 @@ importers:
         version: 9.1.2
       prettier:
         specifier: ^3.2.5
-        version: 3.3.3
+        version: 3.5.1
 
   assets/i18n:
     devDependencies:
@@ -91,8 +91,8 @@ packages:
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+  prettier@3.5.1:
+    resolution: {integrity: sha512-hPpFQvHwL3Qv5AdRvBFMhnKo4tYxp0ReXiPn2bxkiohEX6mBeBwEpBSQTkD458RaaDKQMYSp4hX4UtfUTA5wDw==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -193,7 +193,7 @@ snapshots:
 
   lodash@4.17.21: {}
 
-  prettier@3.3.3: {}
+  prettier@3.5.1: {}
 
   require-directory@2.1.1: {}
 
