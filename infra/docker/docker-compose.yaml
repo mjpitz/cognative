@@ -65,7 +65,7 @@ services:
         condition: service_healthy
       minio-buckets:
         condition: service_completed_successfully
-    image: clickhouse/clickhouse-server:24.12 # amd64 + arm64
+    image: clickhouse/clickhouse-server:25.1 # amd64 + arm64
     environment:
       CLICKHOUSE_DB: otel
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
