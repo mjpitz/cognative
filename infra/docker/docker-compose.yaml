@@ -84,7 +84,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: otel/opentelemetry-collector-contrib:0.119.0 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.120.0 # amd64 + arm64
     ports:
       - 4317:4317
       - 4318:4318
@@ -102,7 +102,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: grafana/grafana-oss:11.5.1 # amd64 + arm64
+    image: grafana/grafana-oss:11.5.2 # amd64 + arm64
     environment:
       GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
     volumes:
