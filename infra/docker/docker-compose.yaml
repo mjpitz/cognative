@@ -3,13 +3,13 @@ name: cognative
 volumes:
   minio_data: {}
   clickhouse_data: {}
+  open_webui_data: {}
   grafana_data: {}
 
 services:
   #==
   # Supporting Services
   #==
-
   traefik:
     image: traefik:v3.3
     restart: always
@@ -98,17 +98,84 @@ services:
   # cluster-agent: {}
   # host-agent: {}
 
-  grafana:
-    depends_on:
-      clickhouse:
-        condition: service_healthy
-    image: grafana/grafana-oss:11.5.1 # amd64 + arm64
+  mcp-bridge:
+    image: mjpitz/mcp-bridge:latest
+    pull_policy: never
+    restart: always
+    build:
+      dockerfile_inline: |
+        FROM ghcr.io/secretiveshell/mcp-bridge/mcp-bridge:0.5.1
+
+        RUN git clone https://github.com/isaacwasserman/mcp-vegalite-server.git /etc/mcp-servers/mcp-vegalite-server
     environment:
-      GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
+      MCP_BRIDGE__CONFIG__JSON: >
+        {
+          "inference_server": {
+            "base_url": "http://${OLLAMA_HOST:?error}/v1",
+            "api_key": "None"
+          },
+          "mcp_servers": {
+            "fetch": {
+              "command": "uvx",
+              "args": [
+                "mcp-server-fetch"
+              ]
+            },
+            "mcp-clickhouse": {
+              "command": "uv",
+              "args": [
+                "run",
+                "--with",
+                "mcp-clickhouse",
+                "--python",
+                "3.13",
+                "mcp-clickhouse"
+              ],
+              "env": {
+                "CLICKHOUSE_HOST": "clickhouse",
+                "CLICKHOUSE_PORT": "8123",
+                "CLICKHOUSE_USER": "clickhouse",
+                "CLICKHOUSE_PASSWORD": "clickhouse",
+                "CLICKHOUSE_SECURE": "false",
+                "CLICKHOUSE_VERIFY": "false",
+                "CLICKHOUSE_CONNECT_TIMEOUT": "30",
+                "CLICKHOUSE_SEND_RECEIVE_TIMEOUT": "30"
+              }
+            },
+            "dataviz": {
+              "command": "uv",
+              "args": [
+                "--directory",
+                "/etc/mcp-servers/mcp-vegalite-server",
+                "run",
+                "mcp_server_datavis",
+                "--output_type",
+                "png"
+              ]
+            }
+          },
+          "network": {
+            "host": "0.0.0.0",
+            "port": 9090
+          }
+        }
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:latest
+    restart: always
+    depends_on:
+      mcp-bridge:
+        condition: service_started
+    environment:
+      - WEBUI_AUTH=False
+      - OPENAI_API_BASE_URL=http://mcp-bridge:9090/v1
+      - ENABLE_OLLAMA_API=false
+      - SCARF_NO_ANALYTICS=true
+      - DO_NOT_TRACK=true
+      - ANONYMIZED_TELEMETRY=false
     volumes:
-      - ./grafana:/etc/grafana
-      - grafana_data:/var/lib/grafana
+      - open_webui_data:/app/backend/data
     labels:
-      - "traefik.http.routers.grafana.rule=Host(`grafana.local.cognative.work`)"
-      - "traefik.http.routers.grafana.service=grafana"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.open-webui.rule=Host(`chat.local.cognative.work`)"
+      - "traefik.http.routers.open-webui.service=open-webui"
+      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
