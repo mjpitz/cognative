@@ -98,78 +98,34 @@ services:
   # cluster-agent: {}
   # host-agent: {}
 
-  mcp-bridge:
-    image: mjpitz/mcp-bridge:latest
-    pull_policy: never
-    restart: always
+  mcpo:
     build:
       dockerfile_inline: |
-        FROM ghcr.io/secretiveshell/mcp-bridge/mcp-bridge:0.5.1
-
-        RUN git clone https://github.com/isaacwasserman/mcp-vegalite-server.git /etc/mcp-servers/mcp-vegalite-server
-    environment:
-      MCP_BRIDGE__CONFIG__JSON: >
-        {
-          "inference_server": {
-            "base_url": "http://${OLLAMA_HOST:?error}/v1",
-            "api_key": "None"
-          },
-          "mcp_servers": {
-            "fetch": {
-              "command": "uvx",
-              "args": [
-                "mcp-server-fetch"
-              ]
-            },
-            "mcp-clickhouse": {
-              "command": "uv",
-              "args": [
-                "run",
-                "--with",
-                "mcp-clickhouse",
-                "--python",
-                "3.13",
-                "mcp-clickhouse"
-              ],
-              "env": {
-                "CLICKHOUSE_HOST": "clickhouse",
-                "CLICKHOUSE_PORT": "8123",
-                "CLICKHOUSE_USER": "clickhouse",
-                "CLICKHOUSE_PASSWORD": "clickhouse",
-                "CLICKHOUSE_SECURE": "false",
-                "CLICKHOUSE_VERIFY": "false",
-                "CLICKHOUSE_CONNECT_TIMEOUT": "30",
-                "CLICKHOUSE_SEND_RECEIVE_TIMEOUT": "30"
-              }
-            },
-            "dataviz": {
-              "command": "uv",
-              "args": [
-                "--directory",
-                "/etc/mcp-servers/mcp-vegalite-server",
-                "run",
-                "mcp_server_datavis",
-                "--output_type",
-                "png"
-              ]
-            }
-          },
-          "network": {
-            "host": "0.0.0.0",
-            "port": 9090
-          }
-        }
+        FROM ghcr.io/astral-sh/uv:debian
+        RUN apt-get update && apt-get install -y curl
+        RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
+        RUN apt-get install -y nodejs
+        RUN npm install -g npm@latest
+    restart: always
+    command: uvx mcpo --config /etc/mcpo/config.json
+    volumes:
+      - ./mcpo:/etc/mcpo
+    labels:
+      - "traefik.http.routers.mcpo.rule=Host(`mcp.local.cognative.work`)"
+      - "traefik.http.routers.mcpo.service=mcpo"
+      - "traefik.http.services.mcpo.loadbalancer.server.port=8000"
 
   open-webui:
-    image: ghcr.io/open-webui/open-webui:latest
+    image: ghcr.io/open-webui/open-webui:v0.6.0
     restart: always
     depends_on:
-      mcp-bridge:
+      mcpo:
         condition: service_started
     environment:
       - WEBUI_AUTH=False
-      - OPENAI_API_BASE_URL=http://mcp-bridge:9090/v1
-      - ENABLE_OLLAMA_API=false
+      - ENABLE_OPENAI_API=flase
+      - OLLAMA_BASE_URL=http://${OLLAMA_HOST:?error}
+      - WEBUI_URL=https://chat.local.cognative.work
       - SCARF_NO_ANALYTICS=true
       - DO_NOT_TRACK=true
       - ANONYMIZED_TELEMETRY=false

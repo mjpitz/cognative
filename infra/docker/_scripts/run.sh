@@ -6,4 +6,4 @@ readonly host_ip=$(ifconfig "${iface}" | sed -En 's/127.0.0.1//;s/.*inet (addr:)
 
 export OLLAMA_HOST="${host_ip}:11434"
 
-concurrently -m 2 pnpm:docker:run:ollama pnpm:docker:run:compose
+"$@"

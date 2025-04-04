@@ -12,8 +12,8 @@
     "docker:cert": "concurrently --maxProcesses 1 'npm:docker:cert:*'",
     "docker:run:ollama": "ollama serve",
     "docker:run:compose": "docker compose up",
-    "docker:run": "bash _scripts/run.sh",
-    "docker:stop": "docker compose rm -fs",
+    "docker:run": "./_scripts/run.sh concurrently -m 2 'pnpm:docker:run:*'",
+    "docker:stop": "./_scripts/run.sh docker compose rm -fs",
     "postinstall": "concurrently 'npm:postinstall:*'",
     "postinstall:mkcert": "GOBIN=$PWD/node_modules/.bin go install filippo.io/mkcert@latest"
   }
