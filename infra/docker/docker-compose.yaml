@@ -3,13 +3,13 @@ name: cognative
 volumes:
   minio_data: {}
   clickhouse_data: {}
+  open_webui_data: {}
   grafana_data: {}
 
 services:
   #==
   # Supporting Services
   #==
-
   traefik:
     image: traefik:v3.3
     restart: always
@@ -98,17 +98,40 @@ services:
   # cluster-agent: {}
   # host-agent: {}
 
-  grafana:
-    depends_on:
-      clickhouse:
-        condition: service_healthy
-    image: grafana/grafana-oss:11.5.1 # amd64 + arm64
-    environment:
-      GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
+  mcpo:
+    build:
+      dockerfile_inline: |
+        FROM ghcr.io/astral-sh/uv:debian
+        RUN apt-get update && apt-get install -y curl
+        RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash -
+        RUN apt-get install -y nodejs
+        RUN npm install -g npm@latest
+    restart: always
+    command: uvx mcpo --config /etc/mcpo/config.json
     volumes:
-      - ./grafana:/etc/grafana
-      - grafana_data:/var/lib/grafana
+      - ./mcpo:/etc/mcpo
     labels:
-      - "traefik.http.routers.grafana.rule=Host(`grafana.local.cognative.work`)"
-      - "traefik.http.routers.grafana.service=grafana"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      - "traefik.http.routers.mcpo.rule=Host(`mcp.local.cognative.work`)"
+      - "traefik.http.routers.mcpo.service=mcpo"
+      - "traefik.http.services.mcpo.loadbalancer.server.port=8000"
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:v0.6.0
+    restart: always
+    depends_on:
+      mcpo:
+        condition: service_started
+    environment:
+      - WEBUI_AUTH=False
+      - ENABLE_OPENAI_API=flase
+      - OLLAMA_BASE_URL=http://${OLLAMA_HOST:?error}
+      - WEBUI_URL=https://chat.local.cognative.work
+      - SCARF_NO_ANALYTICS=true
+      - DO_NOT_TRACK=true
+      - ANONYMIZED_TELEMETRY=false
+    volumes:
+      - open_webui_data:/app/backend/data
+    labels:
+      - "traefik.http.routers.open-webui.rule=Host(`chat.local.cognative.work`)"
+      - "traefik.http.routers.open-webui.service=open-webui"
+      - "traefik.http.services.open-webui.loadbalancer.server.port=8080"
