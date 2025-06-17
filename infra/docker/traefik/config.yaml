@@ -23,3 +23,24 @@ entryPoints:
     http:
       tls:
         options: default
+
+metrics:
+  otlp:
+    grpc:
+      endpoint: collector:4317
+      insecure: true
+
+tracing:
+  otlp:
+    grpc:
+      endpoint: collector:4317
+      insecure: true
+ 
+accesslog:
+  otlp:
+    grpc:
+      endpoint: collector:4317
+      insecure: true
+
+experimental:
+  otlpLogs: true

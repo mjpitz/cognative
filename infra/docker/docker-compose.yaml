@@ -1,5 +1,12 @@
 name: cognative
 
+x-default-logging: &logging
+  driver: "json-file"
+  options:
+    max-size: "5m"
+    max-file: "2"
+    tag: "{{.Name}}"
+
 volumes:
   minio_data: {}
   clickhouse_data: {}
@@ -22,9 +29,10 @@ services:
     command:
       - --configFile=/opt/traefik/etc/config.yaml
     labels:
-      - "traefik.http.routers.traefik.rule=Host(`traefik.local.cognative.work`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.local.c8l.tech`)"
       - "traefik.http.routers.traefik.service=traefik"
       - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    logging: *logging
 
   minio:
     image: quay.io/minio/minio:latest # amd64 + arm64
@@ -39,9 +47,10 @@ services:
     volumes:
       - minio_data:/data
     labels:
-      - "traefik.http.routers.minio.rule=Host(`minio.local.cognative.work`)"
+      - "traefik.http.routers.minio.rule=Host(`minio.local.c8l.tech`)"
       - "traefik.http.routers.minio.service=minio"
       - "traefik.http.services.minio.loadbalancer.server.port=9001"
+    logging: *logging
 
   minio-buckets:
     image: minio/mc
@@ -54,6 +63,7 @@ services:
       /usr/bin/mc mb minio/clickhouse;
       exit 0;
       "
+    logging: *logging
 
   #==
   # Core Services
@@ -79,21 +89,25 @@ services:
     volumes:
       - ./clickhouse:/etc/clickhouse-server/config.d
       - clickhouse_data:/var/lib/clickhouse
+    logging: *logging
 
   collector:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: otel/opentelemetry-collector-contrib:0.119.0 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.128.0 # amd64 + arm64
     ports:
       - 4317:4317
       - 4318:4318
     volumes:
+      - /var/lib/docker/containers/:/var/lib/docker/containers/
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./collector:/etc/otelcol-contrib
     labels:
-      - "traefik.http.routers.collector.rule=Host(`collector.local.cognative.work`)"
+      - "traefik.http.routers.collector.rule=Host(`collector.local.c8l.tech`)"
       - "traefik.http.routers.collector.service=collector"
       - "traefik.http.services.collector.loadbalancer.server.port=4318"
+    logging: *logging
 
   # cluster-agent: {}
   # host-agent: {}
@@ -109,6 +123,7 @@ services:
       - ./grafana:/etc/grafana
       - grafana_data:/var/lib/grafana
     labels:
-      - "traefik.http.routers.grafana.rule=Host(`grafana.local.cognative.work`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.local.c8l.tech`)"
       - "traefik.http.routers.grafana.service=grafana"
       - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    logging: *logging
