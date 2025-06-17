@@ -10,6 +10,8 @@
     "docker:cert:root": "mkcert -install",
     "docker:cert:leaf": "mkcert -cert-file traefik/certs/traefik.cert.pem -key-file traefik/certs/traefik.key.pem '*.local.c8l.tech' 'local.c8l.tech'",
     "docker:cert": "concurrently --maxProcesses 1 'npm:docker:cert:*'",
+    "docker:demo:deploy": "docker compose --env-file .env.demo -f docker-compose.demo.yaml up -d",
+    "docker:demo:teardown": "docker compose --env-file .env.demo -f docker-compose.demo.yaml rm -fs",
     "docker:deploy": "docker compose up -d",
     "docker:teardown": "docker compose rm -fs",
     "postinstall": "concurrently 'npm:postinstall:*'",
