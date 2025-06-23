@@ -8,6 +8,12 @@
     "prettier": "^3.2.5"
   },
   "scripts": {
+    "schema:histogram_metrics": "wget -O .context/schema/histogram_metrics.sql https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/refs/heads/main/exporter/clickhouseexporter/example/default_ddl/histogram_metrics.sql",
+    "schema:logs": "wget -O .context/schema/logs.sql https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/refs/heads/main/exporter/clickhouseexporter/example/default_ddl/logs.sql",
+    "schema:sum_metrics": "wget -O .context/schema/sum_metrics.sql https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/refs/heads/main/exporter/clickhouseexporter/example/default_ddl/sum_metrics.sql",
+    "schema:summary_metrics": "wget -O .context/schema/summary_metrics.sql https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/refs/heads/main/exporter/clickhouseexporter/example/default_ddl/summary_metrics.sql",
+    "schema:traces": "wget -O .context/schema/traces.sql https://raw.githubusercontent.com/open-telemetry/opentelemetry-collector-contrib/refs/heads/main/exporter/clickhouseexporter/example/default_ddl/traces.sql",
+    "schema": "mkdir -p .context/schema && concurrently 'npm:schema:*'",
     "docker:cert": "pnpm --filter @cognative/infra-docker docker:cert",
     "docker:deploy": "pnpm --filter @cognative/infra-docker docker:deploy",
     "docker:teardown": "pnpm --filter @cognative/infra-docker docker:teardown",
