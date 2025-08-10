@@ -45,7 +45,7 @@ annotations:
 
 dependencies:
   - name: minio
-    version: 5.3.0
+    version: 5.4.0
     repository: https://charts.min.io/
 
   - name: cognative
