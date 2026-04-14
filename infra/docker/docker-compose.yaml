@@ -18,7 +18,7 @@ services:
   #==
 
   traefik:
-    image: traefik:v3.3
+    image: traefik:v3.6
     restart: always
     ports:
       - 80:80
@@ -95,7 +95,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: otel/opentelemetry-collector-contrib:0.128.0 # amd64 + arm64
+    image: otel/opentelemetry-collector-contrib:0.150.1 # amd64 + arm64
     ports:
       - 4317:4317
       - 4318:4318
@@ -116,7 +116,7 @@ services:
     depends_on:
       clickhouse:
         condition: service_healthy
-    image: grafana/grafana-oss:11.5.1 # amd64 + arm64
+    image: grafana/grafana-oss:11.6.5 # amd64 + arm64
     environment:
       GF_INSTALL_PLUGINS: "grafana-clickhouse-datasource"
     volumes:
